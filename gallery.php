@@ -10,7 +10,9 @@ include 'koneksi.php'; // Sertakan koneksi database
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="img/LOGO-DAILY.png">
     <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+ 
     <title>Gallery Web Daily Johana</title>
     <style>
         .gallery-section {
@@ -111,11 +113,59 @@ include 'koneksi.php'; // Sertakan koneksi database
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="text-center text-lg-start text-white" style="background-color: #472e8d">
+        <!-- Section: Links -->
+        <section>
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">About Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            Saya Johana Oktavia Ramadhani, mahasiswi Teknik Informatika di Universitas Dian Nuswantoro.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">Contact Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p><i class="bi bi-house-door-fill"></i> Semarang, Jawa Tengah</p>
+                        <p><i class="bi bi-envelope-fill"></i> hanaoktavia82281@gmail.com</p>
+                        <p><i class="bi bi-phone-fill"></i> 089661235659</p>
+                    </div>
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <br>
+                        <!-- Social Media Links -->
+                        <h6 class="text-uppercase fw-bold">Follow Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            <a href="https://www.instagram.com/jhnaoktv_?igsh=ZmprcGJ2OHJmZTA4" class="text-white me-4" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/johanaoktavia?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white me-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://github.com/JohanaOktaviaRamadhani" class="text-white me-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section: Links -->
+
+        <br>
+
+        <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-          © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
+            © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
         </div>
+
     </footer>
 
     <script>

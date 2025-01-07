@@ -1,6 +1,6 @@
 <?php
 include "koneksi.php";
-include 'navbar.php';  // Sertakan file navbar
+include 'navbar.php';
 
 ?>
 
@@ -17,31 +17,30 @@ include 'navbar.php';  // Sertakan file navbar
 </head>
 
 <body>
-    
-    
     <!-- CAROUSEL -->
-        <section id="gallery">
-            <div id="carouselExample" class="carousel slide carousel-custom mx-auto">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="img/caro2.jpg" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/caro1.jpg" class="d-block w-100" alt="...">
-                    </div>
+    <section id="gallery">
+        <div id="carouselExample" class="carousel slide carousel-custom mx-auto">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="img/caro2.jpg" class="d-block w-100" alt="...">
                 </div>
-        
-                <!-- BUTTON NEXT,BACK -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <div class="carousel-item">
+                    <img src="img/caro1.jpg" class="d-block w-100" alt="...">
+                </div>
             </div>
+        
+            <!-- BUTTON NEXT,BACK -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </section>
+    
     <br>
 
     <!-- HEADER -->
@@ -67,89 +66,95 @@ include 'navbar.php';  // Sertakan file navbar
     
     <!-- ARTIKEL -->
     <section id="article" class="text-center p-5">
-    <div class="container">
-        <h1 class="fw-bold display-4 pb-3">article</h1>
-        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-        <?php
-        $sql = "SELECT * FROM article ORDER BY tanggal DESC";
-        $hasil = $conn->query($sql); 
+        <div class="container">
+            <h1 class="fw-bold display-4 pb-3">article</h1>
+            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+                <?php
+                $sql = "SELECT * FROM article ORDER BY tanggal DESC";
+                $hasil = $conn->query($sql); 
 
-        while($row = $hasil->fetch_assoc()){
-        ?>
-            <div class="col">
-            <div class="card h-100">
-                <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
-                <div class="card-body">
-                <h5 class="card-title"><?= $row["judul"]?></h5>
-                <p class="card-text">
-                    <?= $row["isi"]?>
-                </p>
-                </div>
-                <div class="card-footer">
-                <small class="text-body-secondary">
-                    <?= $row["tanggal"]?>
-                </small>
-                </div>
+                while($row = $hasil->fetch_assoc()){
+                ?>
+                    <div class="col">
+                    <div class="card h-100">
+                        <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                        <h5 class="card-title"><?= $row["judul"]?></h5>
+                        <p class="card-text">
+                            <?= $row["isi"]?>
+                        </p>
+                        </div>
+                        <div class="card-footer">
+                        <small class="text-body-secondary">
+                            <?= $row["tanggal"]?>
+                        </small>
+                        </div>
+                    </div>
+                    </div>
+                    <?php
+                }
+                ?> 
             </div>
-            </div>
-            <?php
-        }
-        ?> 
         </div>
-    </div>
     </section>
     <!-- article end -->
     
     <!-- Footer -->
     <footer class="text-center text-lg-start text-white" style="background-color: #472e8d">
     <!-- Section: Links -->
-    <section>
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <br>
-                    <h6 class="text-uppercase fw-bold">Company Name</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
-                    <p>
-                        Saya Johana Oktavia Ramadhani, mahasiswi Teknik Informatika di Universitas Dian Nuswantoro.
-                    </p>
-                </div>
-                <!-- Grid column -->
+        <section>
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">About Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            Saya Johana Oktavia Ramadhani, mahasiswi Teknik Informatika di Universitas Dian Nuswantoro.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
-                    <br>
-                    <h6 class="text-uppercase fw-bold">Contact</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
-                    <p><i class="bi bi-house-door-fill"></i> Semarang, Jawa Tengah</p>
-                    <p><i class="bi bi-envelope-fill"></i> hanaoktavia82281@gmail.com</p>
-                    <p><i class="bi bi-phone-fill"></i> 089661235659</p>
-                </div>
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">Contact Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p><i class="bi bi-house-door-fill"></i> Semarang, Jawa Tengah</p>
+                        <p><i class="bi bi-envelope-fill"></i> hanaoktavia82281@gmail.com</p>
+                        <p><i class="bi bi-phone-fill"></i> 089661235659</p>
+                    </div>
 
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <br>
-                    <!-- Social Media Links -->
-                    <h6 class="text-uppercase fw-bold">Ikuti Kami</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
-                    <a href="#" class="text-white me-4" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="text-white me-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" class="text-white me-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <br>
+                        <!-- Social Media Links -->
+                        <h6 class="text-uppercase fw-bold">Follow Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            <a href="https://www.instagram.com/jhnaoktv_?igsh=ZmprcGJ2OHJmZTA4" class="text-white me-4" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/johanaoktavia?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white me-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://github.com/JohanaOktaviaRamadhani" class="text-white me-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <!-- Section: Links -->
+
+    <br>
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
     </div>
-</footer>
+
+    </footer>
+
     <script>
         window.setTimeout("tampilWaktu()", 1000);
   
@@ -165,6 +170,7 @@ include 'navbar.php';  // Sertakan file navbar
             waktu.getHours() + ":" + waktu.getMinutes() + ":" + waktu.getSeconds();
         }
     </script>
+
     <script>
         const toggleButton = document.getElementById('toggle-mode');
         const body = document.body;
