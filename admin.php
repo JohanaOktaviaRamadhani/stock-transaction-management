@@ -22,8 +22,8 @@ if (!isset($_SESSION['username'])) {
     <!-- Tambahkan CSS untuk memperbaiki dropdown menu dan warna -->
     <style>
         html { position: relative; min-height: 100%; }
-        body { margin-bottom: 100px; /* Margin bottom by footer height */ }
-        footer { position: absolute; bottom: 0; width: 100%; height: 100px; /* Set the fixed height of the footer here */ }
+        body { margin-bottom: 100px; }
+        footer { position: absolute; bottom: 0; width: 100%; height: 100px;/* Set the fixed height of the footer here */ }
 
         /* Navbar custom styles */
         .navbar {
@@ -81,7 +81,6 @@ if (!isset($_SESSION['username'])) {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         /* Section title */
@@ -95,15 +94,15 @@ if (!isset($_SESSION['username'])) {
 
         /* Footer */
         footer {
-            background-color: #1A202C;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
+            background-color: #472e8d;
+            color: #FFFFFF;
+        }
+        footer .h2 {
+            color: #FFFFFF !important;
         }
 
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
+        footer .text-light {
+            color: #FFFFFF !important;
         }
     </style>
 </head>
@@ -160,8 +159,60 @@ if (!isset($_SESSION['username'])) {
     </section>
 
     <!-- Footer -->
-    <footer>
-        <p>&copy; <?= date('Y') ?> My Daily Journal | Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024</p>
+    <footer class="text-center text-lg-start text-white">
+    <!-- Section: Links -->
+        <div id="bagianfooter" style="background-color: #472e8d">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">About Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            Saya Johana Oktavia Ramadhani, mahasiswi Teknik Informatika di Universitas Dian Nuswantoro.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <br>
+                        <h6 class="text-uppercase fw-bold">Contact Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p><i class="bi bi-house-door-fill"></i> Semarang, Jawa Tengah</p>
+                        <p><i class="bi bi-envelope-fill"></i> hanaoktavia82281@gmail.com</p>
+                        <p><i class="bi bi-phone-fill"></i> 089661235659</p>
+                    </div>
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <br>
+                        <!-- Social Media Links -->
+                        <h6 class="text-uppercase fw-bold">Follow Me</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px"/>
+                        <p>
+                            <a href="https://www.instagram.com/jhnaoktv_?igsh=ZmprcGJ2OHJmZTA4" class="text-white me-4" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/johanaoktavia?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-white me-4" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://github.com/JohanaOktaviaRamadhani" class="text-white me-4" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        <!-- Section: Links -->
+
+        <!-- Copyright -->
+         <div style="background-color: #472e8d">
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
+            </div>
+        </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
