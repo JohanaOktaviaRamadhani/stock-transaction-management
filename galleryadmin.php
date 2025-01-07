@@ -221,7 +221,7 @@ if (isset($_POST['hapus'])) {
                                         </div>
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Deskripsi</label>
-                                            <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Tuliskan Deskripsi Media" rows="3" required></textarea>
+                                            <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Tuliskan Deskripsi Media" rows="3" required><?= $row["deskripsi"] ?></textarea>
                                             </div>
                                         <div class="mb-3">
                                             <label>Tipe Media</label>
@@ -235,7 +235,19 @@ if (isset($_POST['hapus'])) {
                                             <input type="file" class="form-control" name="media">
                                             <input type="hidden" name="media_lama" value="<?= $row['file'] ?>">
                                         </div>
-                                    </div>
+                                        <div class="mb-3">
+                                        <label for="formGroupExampleInput3" class="form-label">Gambar Lama</label>
+                                            <?php
+                                            if ($row["file"] != '') {
+                                                if (file_exists('img/' . $row["file"] . '')) {
+                                            ?>
+                                                            <br><img src="img/<?= $row["file"] ?>" width="100">
+                                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        <input type="hidden" name="file_lama" value="<?= $row["file"] ?>">
+                                        </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" name="update">Simpan</button>
