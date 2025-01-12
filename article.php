@@ -1,5 +1,4 @@
 <div class="container">
-
     <!-- Start Button trigger modal -->
     <button type="button" class="btn btn-secondary mb-2" data-bs-toggle="modal" data-bs-target="#IdModal">
         <i class="bi bi-plus-lg"></i> Tambah Article
@@ -8,9 +7,8 @@
 
     <div class="row">
         <div class="table-responsive" id="article_data">
+            
         </div>
-
-        <!-- Start Pop-Up -->
         <!-- Awal Modal Tambah-->
         <div class="modal fade" id="IdModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -46,7 +44,6 @@
             </div>
         </div>
         <!-- Akhir Modal Tambah-->
-        <!-- End Pop-Up -->
     </div>
 </div>
 
@@ -90,16 +87,10 @@ if (isset($_POST['simpan'])) {
 
     //jika ada file yang dikirim  
     if ($nama_gambar != '') {
-		    //panggil function upload_foto untuk cek spesifikasi file yg dikirimkan user
-		    //function ini memiliki 2 keluaran yaitu status dan message
         $cek_upload = upload_foto($_FILES["gambar"]);
-
-				//cek status true/false
         if ($cek_upload['status']) {
-		        //jika true maka message berisi nama file gambar
             $gambar = $cek_upload['message'];
         } else {
-		        //jika true maka message berisi pesan error, tampilkan dalam alert
             echo "<script>
                 alert('" . $cek_upload['message'] . "');
                 document.location='admin.php?page=article';
@@ -107,14 +98,11 @@ if (isset($_POST['simpan'])) {
             die;
         }
     }
-
-		//cek apakah ada id yang dikirimkan dari form
+    
     if (isset($_POST['id'])) {
-        //jika ada id,    lakukan update data dengan id tersebut
         $id = $_POST['id'];
 
         if ($nama_gambar == '') {
-            //jika tidak ganti gambar
             $gambar = $_POST['gambar_lama'];
         } else {
             //jika ganti gambar, hapus gambar lama
@@ -168,7 +156,6 @@ if (isset($_POST['hapus'])) {
     }
 
     $stmt = $conn->prepare("DELETE FROM article WHERE id =?");
-
     $stmt->bind_param("i", $id);
     $hapus = $stmt->execute();
 

@@ -3,7 +3,6 @@ include "koneksi.php";
 include 'navbar.php';
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,7 +66,7 @@ include 'navbar.php';
     <!-- ARTIKEL -->
     <section id="article" class="text-center p-5">
         <div class="container">
-            <h1 class="fw-bold display-4 pb-3">Article</h1>
+            <h2 class="fw-bold display-4 pb-3">Article</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
                 <?php
                 $sql = "SELECT * FROM article ORDER BY tanggal DESC";
@@ -76,22 +75,25 @@ include 'navbar.php';
                 while($row = $hasil->fetch_assoc()){
                 ?>
                     <div class="col">
-                    <div class="card h-100">
-                        <img src="img/<?= $row["gambar"]?>" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                        <h5 class="card-title"><?= $row["judul"]?></h5>
-                        <p class="card-text">
-                            <?= $row["isi"]?>
-                        </p>
-                        </div>
-                        <div class="card-footer">
-                        <small class="text-body-secondary">
-                            <?= $row["tanggal"]?>
-                        </small>
+                        <div class="card h-100">
+                            <img src="img/<?= $row["gambar"]?>" 
+                                class="card-img-top" 
+                                alt="..." 
+                                style="height: 250px; object-fit: cover;" />
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $row["judul"]?></h5>
+                                <p class="card-text">
+                                    <?= $row["isi"]?>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-body-secondary">
+                                    <?= $row["tanggal"]?>
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    <?php
+                <?php
                 }
                 ?> 
             </div>
@@ -101,7 +103,7 @@ include 'navbar.php';
     
     <!-- Footer -->
     <footer class="text-center text-lg-start text-white" style="background-color: #472e8d">
-    <!-- Section: Links -->
+        <!-- Section: Links -->
         <section>
             <div class="container text-center text-md-start mt-5">
                 <!-- Grid row -->
@@ -144,15 +146,12 @@ include 'navbar.php';
                 </div>
             </div>
         </section>
-    <!-- Section: Links -->
-
-    <br>
-
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
-    </div>
-
+        <!-- Section: Links -->
+        <br>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
+        </div>
     </footer>
 
     <script>

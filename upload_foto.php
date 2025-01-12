@@ -4,7 +4,7 @@ function upload_foto($File){
 	$hasil = array();
 	$message = '';
  
-	//File properties:
+	//Properti File:
 	$FileName = $File['name'];
 	$TmpLocation = $File['tmp_name'];
 	$FileSize = $File['size'];
@@ -18,13 +18,13 @@ function upload_foto($File){
 
 	// Check file size
 	if ($FileSize > 1000000) {
-		$message .= "Sorry, your file is too large, max 500KB. ";
+		$message .= "Sorry, your file is too large, max 1000KB. ";
 		$uploadOk = 0;
 	}
 
 	// Allow certain file formats
 	if(!in_array($FileExt, $Allowed)){
-		$message .= "Sorry, only JPG, JPEG, PNG & GIF files are allowed. ";
+		$message .= "Sorry, only JPG, JPEG, PNG ,GIF & MP4 files are allowed. ";
 		$uploadOk = 0; 
 	}
 

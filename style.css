@@ -48,20 +48,13 @@ footer .text-light {
     color: #FFFFFF !important;
 }
 
-/* Carousel image */
 
-/* .carousel-custom {
-    height: 100%; 
-    margin: 0 auto; 
-    object-fit: cover;
-} */
 @media (max-width: 768px) {
     /* Gaya untuk layar kecil */
     .carousel-inner img {
       height: 300px; /* Atur tinggi maksimum untuk layar kecil */
     }
 }
-
 
 /* ARTIKEL */
 #article{
@@ -82,14 +75,6 @@ footer .text-light {
 .card .card-title {
     color: black;
 }
-.img-fixed {
-    height: 200px;
-    object-fit: cover;
-}
-
-
-
-
 
 /* PAGE GALERY */
 .gallery-section {

@@ -1,22 +1,21 @@
 <?php
-include "koneksi.php"; 
+    include "koneksi.php"; 
+    // Query untuk mengambil data artikel
+    $sql1 = "SELECT * FROM article ORDER BY tanggal DESC";
+    $hasil1 = $conn->query($sql1);
+
+    // Menghitung jumlah baris data artikel
+    $jumlah_article = $hasil1->num_rows;
+
+    // Query untuk mengambil data gallery
+    $sql2 = "SELECT * FROM tbl_gallery ORDER BY tanggal DESC";
+    $hasil2 = $conn->query($sql2);
+
+    // Menghitung jumlah baris data gallery
+    $jumlah_gallery = $hasil2->num_rows;
 ?>
 
-<?php
-// Query untuk mengambil data artikel
-$sql1 = "SELECT * FROM article ORDER BY tanggal DESC";
-$hasil1 = $conn->query($sql1);
-
-// Menghitung jumlah baris data artikel
-$jumlah_article = $hasil1->num_rows;
-
-// Query untuk mengambil data gallery
-$sql2 = "SELECT * FROM tbl_gallery ORDER BY tanggal DESC";
-$hasil2 = $conn->query($sql2);
-
-// Menghitung jumlah baris data gallery
-$jumlah_gallery = $hasil2->num_rows;
-?>
+<!-- TAMPILAN DASHBOARD -->
 <div class="container pt-4">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
         <div class="col">

@@ -4,7 +4,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $db = "db_webdailyjurnal"; //nama database
+    $db = "db_webdailyjurnal"; 
 
     //create connection
     $conn = new mysqli($servername, $username, $password, $db);

@@ -19,7 +19,6 @@ if (!isset($_SESSION['username'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Tambahkan CSS untuk memperbaiki dropdown menu dan warna -->
     <style>
         html { position: relative; min-height: 100%; }
         body { margin-bottom: 100px; }
@@ -130,7 +129,6 @@ if (!isset($_SESSION['username'])) {
                             <?= $_SESSION['username'] ?>
                         </a>
                         <ul class="dropdown-menu">
-                            <!-- Logout item with new design -->
                             <li><a class="dropdown-item logout-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
                         </ul>
                     </li> 
