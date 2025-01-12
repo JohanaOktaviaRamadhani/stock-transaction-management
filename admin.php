@@ -63,14 +63,14 @@ if (!isset($_SESSION['username'])) {
             padding: 10px 20px;
             font-weight: bold;
             text-align: center;
-            border-top: 1px solid #D85B5B; /* Ganti dengan warna merah muda */
-            border-bottom: 1px solid #D85B5B; /* Ganti dengan warna merah muda */
+            border-top: 1px solid #F6AD55; 
+            border-bottom: 1px solid #F6AD55; 
             transition: all 0.3s ease;
         }
 
         .logout-item:hover {
-            background-color: #D85B5B; /* Ganti dengan warna merah muda */
-            color: #6B46C1; /* Warna teks kembali ke primary */
+            background-color: #F6AD55; 
+            color: #6B46C1; 
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }

@@ -6,7 +6,7 @@ include "upload_foto.php";
 if (isset($_POST['simpan'])) {
     $judul = $_POST['judul'];
     $deskripsi = $_POST['deskripsi'];
-    $tipe_media = $_POST['tipe_media']; 
+    $tipe_media = $_POST['tipe_media'];
     $tanggal = date("Y-m-d H:i:s");
     $media = '';
     $nama_media = $_FILES['media']['name'];
@@ -88,10 +88,10 @@ if (isset($_POST['update'])) {
 // Jika tombol hapus diklik
 if (isset($_POST['hapus'])) {
     $id = $_POST['id'];
-    $media = $_POST['file']; 
+    $media = $_POST['file'];
 
-    if ($media && file_exists("img/" . $media)) 
-    unlink("img/" . $media);
+    if ($media && file_exists("img/" . $media))
+        unlink("img/" . $media);
 
     $stmt = $conn->prepare("DELETE FROM tbl_gallery WHERE id = ?");
     $stmt->bind_param("i", $id);
@@ -111,6 +111,45 @@ if (isset($_POST['hapus'])) {
     $stmt->close();
 }
 ?>
+
+<!-- Modal Tambah -->
+<div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTambahLabel">Tambah Media</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul</label>
+                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Tuliskan Judul Media" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="deskripsi" class="form-label">Deskripsi</label>
+                        <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Tuliskan Deskripsi Media" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipe_media" class="form-label">Tipe Media</label>
+                        <select class="form-select" id="tipe_media" name="tipe_media" required>
+                            <option value="gambar">Gambar</option>
+                            <option value="video">Video</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Media</label>
+                        <input type="file" class="form-control" id="file" name="media" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <input type="submit" value="Simpan" name="simpan" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="container py-4">
     <!-- Button trigger modal -->
@@ -132,10 +171,10 @@ if (isset($_POST['hapus'])) {
             </thead>
             <tbody>
                 <?php
-                    $sql = "SELECT * FROM tbl_gallery ORDER BY id DESC";
-                    $hasil = $conn->query($sql);
-                    $no = 1;
-                    while ($row = $hasil->fetch_assoc()) {
+                $sql = "SELECT * FROM tbl_gallery ORDER BY id DESC";
+                $hasil = $conn->query($sql);
+                $no = 1;
+                while ($row = $hasil->fetch_assoc()) {
                 ?>
                     <tr>
                         <td><?= $no++ ?></td>
@@ -153,8 +192,7 @@ if (isset($_POST['hapus'])) {
                         </td>
                         <td>
                             <!-- Tombol Edit -->
-                            <a href="#" title="edit" class="badge rounded-pill text-bg-success" data-bs-toggle="modal" 
-                            data-bs-target="#modalEdit<?= $row["id"] ?>">
+                            <a href="#" title="edit" class="badge rounded-pill text-bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row["id"] ?>">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <!-- Tombol Delete -->
@@ -163,46 +201,32 @@ if (isset($_POST['hapus'])) {
                             </a>
                         </td>
                     </tr>
-                    
-                    <!-- Modal Tambah -->
-                    <div class="modal fade" id="modalTambah" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTambahLabel" aria-hidden="true">
+
+                    <!-- Modal hapus  -->
+                    <div class="modal fade" id="modalHapus<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="modalTambahLabel">Tambah Media</h1>
+                                    <h5 class="modal-title">Hapus Media</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <form method="post" action="" enctype="multipart/form-data">
                                     <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="judul" class="form-label">Judul</label>
-                                            <input type="text" class="form-control" id="judul" name="judul" placeholder="Tuliskan Judul Media" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="deskripsi" class="form-label">Deskripsi</label>
-                                            <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Tuliskan Deskripsi Media" rows="3" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="tipe_media" class="form-label">Tipe Media</label>
-                                            <select class="form-select" id="tipe_media" name="tipe_media" required>
-                                                <option value="gambar">Gambar</option>
-                                                <option value="video">Video</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="file" class="form-label">Media</label>
-                                            <input type="file" class="form-control" id="file" name="media" required>
+                                            <label for="formGroupExampleInput" class="form-label">Yakin akan menghapus media berjudul " <strong><?= $row["judul"] ?></strong>"?</label>
+                                            <input type="hidden" name="id" value="<?= $row["id"] ?>">
+                                            <input type="hidden" name="file" value="<?= $row["file"] ?>">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                        <input type="submit" value="Simpan" name="simpan" class="btn btn-primary">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                                        <button type="submit" class="btn btn-danger" name="hapus">Hapus</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                                        
+
                     <!-- Modal Edit -->
                     <div class="modal fade" id="modalEdit<?= $row['id'] ?>" tabindex="-1">
                         <div class="modal-dialog">
@@ -221,7 +245,7 @@ if (isset($_POST['hapus'])) {
                                         <div class="mb-3">
                                             <label for="deskripsi" class="form-label">Deskripsi</label>
                                             <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Tuliskan Deskripsi Media" rows="3" required><?= $row["deskripsi"] ?></textarea>
-                                            </div>
+                                        </div>
                                         <div class="mb-3">
                                             <label>Tipe Media</label>
                                             <select name="tipe_media" class="form-select">
@@ -236,57 +260,30 @@ if (isset($_POST['hapus'])) {
                                         </div>
                                         <div class="mb-3">
                                             <label for="formGroupExampleInput3" class="form-label">Gambar Lama</label>
-                                                <?php
-                                                    if ($row["file"] != '') {
-                                                        if (file_exists('img/' . $row["file"] . '')) {
-                                                            ?>
-                                                                <br>
-                                                                <img src="img/<?= $row["file"] ?>" width="100">
-                                                            <?php
-                                                        }
-                                                    }
-                                                ?>
+                                            <?php
+                                            if ($row["file"] != '') {
+                                                if (file_exists('img/' . $row["file"] . '')) {
+                                            ?>
+                                                    <br>
+                                                    <img src="img/<?= $row["file"] ?>" width="100">
+                                            <?php
+                                                }
+                                            }
+                                            ?>
                                             <input type="hidden" name="file_lama" value="<?= $row["file"] ?>">
                                         </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" name="update">Simpan</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" name="update">Simpan</button>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
                         </div>
                     </div>
 
-
-                    <!-- Modal Hapus -->
-                    <div class="modal fade" id="modalHapus<?= $row["id"] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Hapus Media</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <form method="post" action="" enctype="multipart/form-data">
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="formGroupExampleInput" class="form-label">Yakin akan menghapus media ini <strong><?= $row["file"] ?></strong>?</label>
-                                            <input type="hidden" name="id" value="<?= $row["id"] ?>">
-                                            <input type="hidden" name="file" value="<?= $row["file"] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                                        <button type="submit" class="btn btn-danger" name="hapus">Hapus</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
                 <?php } ?>
-                
+
             </tbody>
         </table>
     </div>
 </div>
-
