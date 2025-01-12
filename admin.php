@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
     <style>
         html { position: relative; min-height: 100%; }
         body { margin-bottom: 100px; }
-        footer { position: absolute; bottom: 0; width: 100%; height: 100px;/* Set the fixed height of the footer here */ }
+        footer { position: absolute; bottom: 0; width: 100%; height: 100px;}
 
         /* Navbar custom styles */
         .navbar {
@@ -40,7 +40,7 @@ if (!isset($_SESSION['username'])) {
         }
 
         .navbar-nav .nav-link:hover {
-            color: #F6AD55 !important; /* Hover effect with a complementary color */
+            color: #F6AD55 !important; 
         }
 
         .dropdown-menu {

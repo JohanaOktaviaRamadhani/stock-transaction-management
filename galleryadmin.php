@@ -152,11 +152,12 @@ if (isset($_POST['hapus'])) {
 </div>
 
 <div class="container py-4">
-    <!-- Button trigger modal -->
+    <!-- Button tambah media -->
     <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
         <i class="bi bi-plus-lg"></i> Tambah Media
     </button>
 
+    <!-- Tabel output -->
     <div class="table-responsive">
         <table class="table table-hover">
             <thead class="table-dark">
