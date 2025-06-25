@@ -67,30 +67,55 @@ include 'navbar.php';
     <section id="article" class="text-center p-5">
         <div class="container">
             <h2 class="fw-bold display-4 pb-3">Article</h2>
-            <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 <?php
-                $sql = "SELECT * FROM article ORDER BY tanggal DESC";
+                $sql = "SELECT * FROM tbl_stok ORDER BY tanggal DESC";
                 $hasil = $conn->query($sql); 
 
                 while($row = $hasil->fetch_assoc()){
                 ?>
                     <div class="col">
-                        <div class="card h-100">
-                            <img src="img/<?= $row["gambar"]?>" 
-                                class="card-img-top" 
-                                alt="..." 
-                                style="height: 250px; object-fit: cover;" />
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $row["judul"]?></h5>
-                                <p class="card-text">
-                                    <?= $row["isi"]?>
-                                </p>
+                        <div class="card h-100 border-0"
+                            style="background: linear-gradient(to bottom right, #eae6fc, #f8f4ff); 
+                                    border-radius: 1rem; 
+                                    transition: box-shadow 0.3s ease-in-out;
+                                    box-shadow: 0 0 0 rgba(162, 139, 212, 0.5);"
+                            onmouseover="this.style.boxShadow='0 0 15px 3px rgba(162,139,212,0.75)'"
+                            onmouseout="this.style.boxShadow='0 0 0 rgba(162, 139, 212, 0.5)'">
+
+                            <img src="img/<?= $row["gambar"] ?>"
+                                class="card-img-top"
+                                alt="<?= $row["nama_brg"] ?>"
+                                style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-top-left-radius: 1rem; border-top-right-radius: 1rem;" 
+                            />
+                            <div class="card-body text-start" style="color: #5c5270;">
+                            <h5 class="card-title fw-bold" style="color: #4b3f72;">
+                                <?= $row["nama_brg"] ?>
+                            </h5>
+                            <p class="card-text small" style="color: #6d5d92;">
+                                <?= substr(strip_tags($row["deskripsi"]), 0, 100) ?>...
+                            </p>
                             </div>
-                            <div class="card-footer">
-                                <small class="text-body-secondary">
-                                    <?= $row["tanggal"]?>
-                                </small>
+
+                            <div class="card-footer d-flex justify-content-between align-items-center border-0"
+                                style="background-color: #f0eaff; border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem;">
+                            
+                            <span class="fw-bold" style="color: #4caf50;">
+                                Rp<?= number_format($row["harga"] ?? 0, 0, ',', '.') ?>
+                            </span>
+
+                            <span style="
+                                    background-color: <?= ($row["stok"] > 0) ? '#a28bd4' : '#c4b5d9' ?>;
+                                    color: #ffffff;
+                                    font-weight: 500;
+                                    padding: 6px 12px;
+                                    border-radius: 999px;
+                                    font-size: 0.85rem;
+                                ">
+                                <?= ($row["stok"] > 0) ? 'Stok: '.$row["stok"] : 'Stok Habis' ?>
+                            </span>
                             </div>
+
                         </div>
                     </div>
                 <?php
