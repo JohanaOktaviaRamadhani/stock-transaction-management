@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="admin.php?page=dashboard">My Daily Journal</a>
+            <a class="navbar-brand" href="admin.php?page=dashboard">My Bisnis</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
