@@ -1,7 +1,7 @@
 <?php
 include "koneksi.php";
 
-// KPI Queries
+// Data KPI
 $bulan_ini = date('Y-m');
 $bulan_lalu = date('Y-m', strtotime('-1 month'));
 
@@ -29,6 +29,7 @@ $jumlah_stok_rendah = $stok_rendah_q->num_rows;
 
 <!-- STYLES -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
     .dashboard-card {
         border: none;
@@ -54,10 +55,7 @@ $jumlah_stok_rendah = $stok_rendah_q->num_rows;
     .bg-gradient-teal { background: linear-gradient(135deg, #11998e, #38ef7d); }
     .bg-gradient-yellow { background: linear-gradient(135deg, #f7971e, #ffd200); }
     .bg-gradient-red { background: linear-gradient(135deg, #f953c6, #b91d73); }
-    .object-fit-cover {
-        object-fit: cover;
-        object-position: center;
-    }
+    .fs-6 { font-size: 0.95rem !important; }
 </style>
 
 <!-- DASHBOARD -->
@@ -134,37 +132,25 @@ $jumlah_stok_rendah = $stok_rendah_q->num_rows;
         <div class="col">
             <div class="card dashboard-card p-4 text-center">
                 <h6 class="text-muted text-uppercase fs-6">Produk Terlaris</h6>
-                <?php
-                $gambar_terlaris = (!empty($produk_terlaris['gambar']) && file_exists("img/" . $produk_terlaris['gambar']))
-                    ? $produk_terlaris['gambar']
-                    : 'default.png';
-                ?>
-                <div class="ratio ratio-1x1 mb-2 rounded overflow-hidden shadow-sm" style="max-width: 90px; margin: 0 auto;">
-                    <img src="img/<?= $gambar_terlaris ?>" class="w-100 h-100 object-fit-cover" alt="Produk Terlaris">
-                </div>
-                <h5 class="fw-bold"><?= $produk_terlaris['nama_brg'] ?? '-' ?></h5>
-                <p class="mb-0 small text-muted">Terjual: <?= $produk_terlaris['total_jual'] ?? 0 ?> pcs</p>
+                <?php if ($produk_terlaris): ?>
+                    <h5 class="fw-bold"><?= $produk_terlaris['nama_brg'] ?></h5>
+                    <p class="mb-0 small text-muted">Terjual: <?= $produk_terlaris['total_jual'] ?> pcs</p>
+                <?php else: ?>
+                    <p class="text-muted">Belum ada data</p>
+                <?php endif; ?>
             </div>
         </div>
 
         <!-- Produk Stok Rendah -->
         <div class="col">
             <div class="card dashboard-card p-4">
-                <div class="d-flex align-items-center">
-                    <div class="icon-badge bg-gradient-red me-3">
-                        <i class="bi bi-exclamation-triangle"></i>
-                    </div>
-                    <div>
-                        <h6 class="text-muted text-uppercase fs-6 mb-1">Produk Stok Rendah</h6>
-                        <h5 class="text-danger fw-bold mb-1"><?= $jumlah_stok_rendah ?> Produk</h5>
-                        <p class="small mb-0">Segera lakukan restock<br>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#stokModal">Lihat detail</a>
-                        </p>
-                    </div>
-                </div>
+                <h6 class="text-muted text-uppercase fs-6">Produk Stok Rendah</h6>
+                <h5 class="text-danger fw-bold"><?= $jumlah_stok_rendah ?> Produk</h5>
+                <p class="small mb-0">Segera lakukan restock<br>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#stokModal">Lihat detail</a>
+                </p>
             </div>
         </div>
-
     </div>
 </div>
 

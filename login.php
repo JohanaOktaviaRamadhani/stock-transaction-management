@@ -2,34 +2,43 @@
 session_start();
 include "koneksi.php";
 
-$error_message = ""; // Variabel untuk pesan error
-
-// Redirect jika sudah login
-if (isset($_SESSION['username'])) {
+// Cek apakah sudah login, jangan redirect ke admin.php kalau admin.php redirect balik ke login.php
+if (isset($_SESSION['nama_admin'])) {
+    // optional: cek validitas session di database jika mau lebih aman
     header("location:admin.php");
+    exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['user'];
-    $password = md5($_POST['pass']);
+$error_message = "";
 
-    $stmt = $conn->prepare("SELECT username, password FROM tbl_user WHERE username=? AND password=?");
-    $stmt->bind_param("ss", $username, $password);
+// Cek jika ada request POST untuk login
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nama_admin = $_POST['user'];
+    $password = md5($_POST['pass']); // ⚠️ FYI: untuk production, ganti dengan password_hash & password_verify
+
+    $stmt = $conn->prepare("SELECT id, nama_admin, password FROM tbl_admin WHERE nama_admin = ? AND password = ?");
+    $stmt->bind_param("ss", $nama_admin, $password);
     $stmt->execute();
     $hasil = $stmt->get_result();
-    $row = $hasil->fetch_array(MYSQLI_ASSOC);
+    $row = $hasil->fetch_assoc();
 
     if (!empty($row)) {
-        $_SESSION['username'] = $row['username'];
+        // Set session dan redirect ke admin
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['nama_admin'] = $row['nama_admin'];
+
+        // Redirect hanya saat login sukses
         header("location:admin.php");
+        exit;
     } else {
-        $error_message = "Invalid username or password. Please try again."; 
+        $error_message = "Invalid username or password. Please try again.";
     }
 
     $stmt->close();
     $conn->close();
 }
 ?>
+
     <!DOCTYPE html>
     <html lang="en">
         <head>

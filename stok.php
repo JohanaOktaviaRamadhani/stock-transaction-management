@@ -85,7 +85,7 @@ if (isset($_POST['simpan'])) {
     $stok       = $_POST['stok'];
     $isi        = ''; // default kosong, jika tidak dipakai
     $tanggal    = date("Y-m-d H:i:s");
-    $username   = $_SESSION['username'];
+    $username   = $_SESSION['nama_admin'];
     $gambar     = '';
     $nama_gambar = $_FILES['gambar']['name'];
 

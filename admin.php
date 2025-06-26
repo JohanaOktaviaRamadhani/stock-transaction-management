@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['nama_admin'])) {
+    header("location:login.php");
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -71,7 +72,7 @@ if (!isset($_SESSION['username'])) {
                     </li> 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white fw-bold" href="#" role="button" data-bs-toggle="dropdown">
-                            <?= htmlspecialchars($_SESSION['username']) ?>
+                            <?= htmlspecialchars($_SESSION['nama_admin']) ?>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item logout-item" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
