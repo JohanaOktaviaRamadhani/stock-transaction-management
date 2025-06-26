@@ -292,3 +292,182 @@ if (isset($_POST['hapus'])) {
     }
 });
 </script>
+
+<style>
+  :root {
+  --lilac-gradient-start: #eae6fc;
+  --lilac-gradient-end: #f8f4ff;
+  --lilac-shadow: rgba(162, 139, 212, 0.75);
+  --lilac-primary: #a28bd4;
+  --lilac-muted: #c4b5d9;
+  --text-dark: #4b3f72;
+  --text-muted: #6d5d92;
+  --bg-footer: #f0eaff;
+}
+
+/* Background */
+body {
+  background-color: var(--lilac-gradient-end);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text-dark);
+}
+
+/* Table */
+.table thead {
+  background: linear-gradient(to right, var(--lilac-primary), var(--lilac-muted));
+  color: white;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f4f0ff;
+  transition: 0.3s;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--lilac-primary);
+  border: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #8e77c7;
+  box-shadow: 0 4px 10px var(--lilac-shadow);
+}
+
+.btn-warning {
+  background-color: #fdd68f;
+  border: none;
+}
+
+.btn-success {
+  background-color: #88d6ba;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #e79999;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #d3d3e3;
+  color: #4b3f72;
+  border: none;
+}
+
+/* Modal */
+.modal-content {
+  border-radius: 1rem;
+  box-shadow: 0 0 15px var(--lilac-shadow);
+  background: linear-gradient(to bottom right, var(--lilac-gradient-start), var(--lilac-gradient-end));
+  border: 1px solid var(--lilac-muted);
+}
+
+.modal-header {
+  background-color: var(--lilac-primary);
+  color: white;
+  border-radius: 1rem 1rem 0 0;
+}
+
+/* Inputs */
+input.form-control, select.form-select {
+  border-radius: 0.75rem;
+  border: 1px solid var(--lilac-muted);
+  background-color: white;
+}
+
+input.form-control:read-only {
+  background-color: #f0eaff;
+  pointer-events: none;
+  cursor: not-allowed;
+  color: #999;
+}
+
+/* Badge Aksi */
+.badge.bg-success {
+  background-color: #88d6ba;
+  cursor: pointer;
+}
+
+.badge.bg-danger {
+  background-color: #e79999;
+  cursor: pointer;
+}
+
+/* Extra: hover effect on card (optional) */
+.card-effect-hover {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 0 rgba(162, 139, 212, 0.5);
+}
+
+.card-effect-hover:hover {
+  box-shadow: 0 0 15px 3px rgba(162, 139, 212, 0.75);
+}
+
+/* Modal Animation */
+.modal.fade .modal-dialog {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.4s ease-out;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Button Hover Animation */
+.btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Input Focus Animation */
+input.form-control:focus, select.form-select:focus {
+  border-color: #a28bd4;
+  box-shadow: 0 0 0 0.2rem rgba(162, 139, 212, 0.25);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Badge Hover */
+.badge {
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Card Hover Reuse */
+.card-effect-hover {
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card-effect-hover:hover {
+  box-shadow: 0 0 15px 3px rgba(162,139,212,0.75);
+  transform: translateY(-5px);
+}
+
+/* Table Row Appear Animation (optional) */
+@keyframes fadeInRow {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.table tbody tr {
+  animation: fadeInRow 0.5s ease-in-out;
+}
+
+</style>

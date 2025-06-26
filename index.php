@@ -51,10 +51,6 @@ include 'navbar.php';
                         Saya Johana Oktavia Ramadhani, mahasiswi Teknik Informatika di Universitas Dian Nuswantoro. Website ini saya buat untuk berbagi artikel, ide-ide menarik, dan inspirasi visual yang bisa kamu nikmati setiap hari.
                         <br>Yuk, jelajahi dan temukan hal-hal baru di sini.
                     </p>
-                    <h6 style="color: #7c4dff;">
-                        <span id="tanggal"></span>
-                        <span id="jam"></span>
-                    </h6>
                 </div>
             </div>
         </div>
@@ -148,19 +144,6 @@ include 'navbar.php';
             © 2024 Dibuat oleh Johana Oktavia Ramadhani - A11.2023.15024
         </div>
     </footer>
-
-    <script>
-        window.setTimeout("tampilWaktu()", 1000);
-        function tampilWaktu() {
-            var waktu = new Date();
-            var bulan = waktu.getMonth() + 1;
-            setTimeout("tampilWaktu()", 1000);
-            document.getElementById("tanggal").innerHTML =
-                waktu.getDate() + "/" + bulan + "/" + waktu.getFullYear();
-            document.getElementById("jam").innerHTML =
-                waktu.getHours() + ":" + waktu.getMinutes() + ":" + waktu.getSeconds();
-        }
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
