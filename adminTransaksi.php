@@ -123,7 +123,6 @@ if (isset($_POST['hapus'])) {
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">Edit Transaksi</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-2">
@@ -203,7 +202,6 @@ if (isset($_POST['hapus'])) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Tambah Transaksi</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id_admin" value="<?= $_SESSION['id'] ?>">
