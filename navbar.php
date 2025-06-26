@@ -3,7 +3,7 @@
   <div class="container">
     <a class="navbar-brand flex items-center space-x-2 text-white font-semibold" href="index.php">
       <img src="img/LOGO-DAILY.png" class="img-fluid" width="50" alt="Daily Website Logo">
-      <span class="text-lg">Nama Bisnis</span>
+      <span class="text-lg">Lilac Store</span>
     </a>
     <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"

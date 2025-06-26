@@ -74,8 +74,6 @@ if (isset($_POST['hapus'])) {
     }
 }
 ?>
-
-
 <div class="container py-4">
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
         <i class="bi bi-plus-lg"></i> Tambah Transaksi
@@ -83,7 +81,7 @@ if (isset($_POST['hapus'])) {
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
-            <thead class="table-dark">
+            <thead class="thead-lilac">
                 <tr>
                     <th>No</th>
                     <th>Tanggal</th>
@@ -97,23 +95,25 @@ if (isset($_POST['hapus'])) {
             </thead>
             <tbody>
                 <?php
-                $q = $conn->query("SELECT * FROM tbl_transaksi ORDER BY tgl_trans DESC");
-                $no = 1;
-                while ($row = $q->fetch_assoc()) :
-                ?>
-                <tr>
-                    <td><?= $no++ ?></td>
-                    <td><?= $row['tgl_trans'] ?></td>
-                    <td><?= $row['id_admin'] ?></td>
-                    <td><?= $row['nama_brg'] ?></td>
-                    <td>Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
-                    <td><?= $row['jml_jual'] ?></td>
-                    <td>Rp<?= number_format($row['subtotal'], 0, ',', '.') ?></td>
-                    <td>
-                        <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id_trans'] ?>">Edit</a>
-                        <a href="#" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $row['id_trans'] ?>">Hapus</a>
-                    </td>
-                </tr>
+                  $q = $conn->query("SELECT * FROM tbl_transaksi ORDER BY tgl_trans DESC");
+                  $no = 1;
+                  while ($row = $q->fetch_assoc()) :
+                  ?>
+                  <tr>
+                      <td><?= $no++ ?></td>
+                      <td><?= $row['tgl_trans'] ?></td>
+                      <td><?= $row['id_admin'] ?></td>
+                      <td><?= $row['nama_brg'] ?></td>
+                      <td>Rp<?= number_format($row['harga'], 0, ',', '.') ?></td>
+                      <td><?= $row['jml_jual'] ?></td>
+                      <td>Rp<?= number_format($row['subtotal'], 0, ',', '.') ?></td>
+                      <td>
+                        <div class="d-flex gap-2">
+                          <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id_trans'] ?>">Edit</a>
+                          <a href="#" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $row['id_trans'] ?>">Hapus</a>
+                        </div>
+                      </td>
+                  </tr>
 
                 <!-- Modal Edit -->
                 <div class="modal fade" id="modalEdit<?= $row['id_trans'] ?>" tabindex="-1">
@@ -189,6 +189,7 @@ if (isset($_POST['hapus'])) {
                         </form>
                     </div>
                 </div>
+
                 <?php endwhile; ?>
             </tbody>
         </table>
@@ -277,7 +278,7 @@ if (isset($_POST['hapus'])) {
       document.getElementById('subtotal_edit_' + id).value = harga * jumlah;
   }
 
-  // Reset modalTambah saat dibuka (bersihkan semua input/kembali ke default)
+  // Reset di modalTambah 
   document.addEventListener('DOMContentLoaded', function () {
     const modalTambah = document.getElementById('modalTambah');
     if (modalTambah) {
@@ -293,181 +294,252 @@ if (isset($_POST['hapus'])) {
 });
 </script>
 
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
 <style>
   :root {
-  --lilac-gradient-start: #eae6fc;
-  --lilac-gradient-end: #f8f4ff;
-  --lilac-shadow: rgba(162, 139, 212, 0.75);
-  --lilac-primary: #a28bd4;
-  --lilac-muted: #c4b5d9;
-  --text-dark: #4b3f72;
-  --text-muted: #6d5d92;
-  --bg-footer: #f0eaff;
+    --lilac-gradient-start: #eae6fc;
+    --lilac-gradient-end: #f8f4ff;
+    --lilac-shadow: rgba(162, 139, 212, 0.75);
+    --lilac-primary: #a28bd4;
+    --lilac-muted: #c4b5d9;
+    --text-dark: #3e2d64;
+    --text-muted: #6d5d92;
+    --bg-footer: #f0eaff;
+    --table-hover: rgba(226, 215, 255, 0.6);
+    --table-stripe: #f7f1ff;
+  }
+
+  body {
+    background-color: var(--lilac-gradient-end);
+    font-family: 'Quicksand', sans-serif;
+    color: var(--text-dark);
+  }
+
+  /* Table */
+  .table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(162, 139, 212, 0.1);
+    animation: fadeInTable 0.6s ease;
+    background-color: white;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .table .badge {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  display: inline-block;
 }
 
-/* Background */
-body {
-  background-color: var(--lilac-gradient-end);
-  font-family: 'Segoe UI', sans-serif;
-  color: var(--text-dark);
+.d-flex.gap-2 {
+  gap: 0.5rem;
 }
 
-/* Table */
-.table thead {
-  background: linear-gradient(to right, var(--lilac-primary), var(--lilac-muted));
-  color: white;
-}
+  .thead-lilac {
+    background-color: var(--lilac-primary) !important;
+  }
 
-.table-hover tbody tr:hover {
-  background-color: #f4f0ff;
-  transition: 0.3s;
-}
+  .thead-lilac th {
+    background-color: var(--lilac-primary) !important;
+    color: black !important;
+    font-weight: 700;
+    font-size: 1.05rem; /* Tambahkan atau sesuaikan ukuran font di sini */
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+  }
 
-/* Buttons */
-.btn-primary {
-  background-color: var(--lilac-primary);
-  border: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
 
-.btn-primary:hover {
-  background-color: #8e77c7;
-  box-shadow: 0 4px 10px var(--lilac-shadow);
-}
+  .table th,
+  .table td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+    white-space: nowrap; 
+  }
+  .table td:nth-child(4) {
+    text-align: left; 
+    max-width: 300px;
+    white-space: normal;
+  }
+  .table tbody tr:nth-child(even) {
+    background-color: var(--table-stripe);
+  }
 
-.btn-warning {
-  background-color: #fdd68f;
-  border: none;
-}
+  .table-hover tbody tr {
+    transition: all 0.2s ease;
+  }
 
-.btn-success {
-  background-color: #88d6ba;
-  border: none;
-}
+  .table-hover tbody tr:hover {
+    background-color: var(--table-hover);
+  }
 
-.btn-danger {
-  background-color: #e79999;
-  border: none;
-}
+  .table tbody tr {
+    animation: fadeInRow 0.4s ease-in-out both;
+  }
 
-.btn-secondary {
-  background-color: #d3d3e3;
-  color: #4b3f72;
-  border: none;
-}
+  @keyframes fadeInRow {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-/* Modal */
-.modal-content {
-  border-radius: 1rem;
-  box-shadow: 0 0 15px var(--lilac-shadow);
-  background: linear-gradient(to bottom right, var(--lilac-gradient-start), var(--lilac-gradient-end));
-  border: 1px solid var(--lilac-muted);
-}
+  @keyframes fadeInTable {
+    0% {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 
-.modal-header {
-  background-color: var(--lilac-primary);
-  color: white;
-  border-radius: 1rem 1rem 0 0;
-}
+  /* Buttons */
+  .btn-primary {
+    background-color: var(--lilac-primary);
+    border: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+  }
 
-/* Inputs */
-input.form-control, select.form-select {
-  border-radius: 0.75rem;
-  border: 1px solid var(--lilac-muted);
-  background-color: white;
-}
+  .btn-primary:hover {
+    background-color: #8e77c7;
+    box-shadow: 0 4px 10px var(--lilac-shadow);
+  }
 
-input.form-control:read-only {
-  background-color: #f0eaff;
-  pointer-events: none;
-  cursor: not-allowed;
-  color: #999;
-}
+  .btn-warning {
+    background-color: #fdd68f;
+    border: none;
+  }
 
-/* Badge Aksi */
-.badge.bg-success {
-  background-color: #88d6ba;
-  cursor: pointer;
-}
+  .btn-success {
+    background-color: #88d6ba;
+    border: none;
+  }
 
-.badge.bg-danger {
-  background-color: #e79999;
-  cursor: pointer;
-}
+  .btn-danger {
+    background-color: #e79999;
+    border: none;
+  }
 
-/* Extra: hover effect on card (optional) */
-.card-effect-hover {
-  transition: box-shadow 0.3s ease-in-out;
-  box-shadow: 0 0 0 rgba(162, 139, 212, 0.5);
-}
+  .btn-secondary {
+    background-color: #d3d3e3;
+    color: #4b3f72;
+    border: none;
+  }
 
-.card-effect-hover:hover {
-  box-shadow: 0 0 15px 3px rgba(162, 139, 212, 0.75);
-}
+  .btn {
+    transition: all 0.3s ease-in-out;
+  }
 
-/* Modal Animation */
-.modal.fade .modal-dialog {
-  transform: translateY(20px);
-  opacity: 0;
-  transition: all 0.4s ease-out;
-}
+  .btn:hover {
+    transform: scale(1.04);
+  }
 
-.modal.fade.show .modal-dialog {
-  transform: translateY(0);
-  opacity: 1;
-}
+  /* Modal */
+  .modal-content {
+    border-radius: 1rem;
+    box-shadow: 0 0 15px var(--lilac-shadow);
+    background: linear-gradient(to bottom right, var(--lilac-gradient-start), var(--lilac-gradient-end));
+    border: 1px solid var(--lilac-muted);
+  }
 
-/* Button Hover Animation */
-.btn {
-  transition: all 0.3s ease-in-out;
-}
+  .modal-header {
+    background-color: var(--lilac-primary);
+    color: white;
+    border-radius: 1rem 1rem 0 0;
+  }
 
-.btn:hover {
-  transform: scale(1.05);
-}
-
-/* Input Focus Animation */
-input.form-control:focus, select.form-select:focus {
-  border-color: #a28bd4;
-  box-shadow: 0 0 0 0.2rem rgba(162, 139, 212, 0.25);
-  transition: all 0.3s ease-in-out;
-}
-
-/* Badge Hover */
-.badge {
-  transition: all 0.3s ease;
-}
-
-.badge:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
-/* Card Hover Reuse */
-.card-effect-hover {
-  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
-.card-effect-hover:hover {
-  box-shadow: 0 0 15px 3px rgba(162,139,212,0.75);
-  transform: translateY(-5px);
-}
-
-/* Table Row Appear Animation (optional) */
-@keyframes fadeInRow {
-  from {
+  .modal.fade .modal-dialog {
+    transform: translateY(20px);
     opacity: 0;
-    transform: translateY(10px);
+    transition: all 0.4s ease-out;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-.table tbody tr {
-  animation: fadeInRow 0.5s ease-in-out;
-}
+  .modal.fade.show .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Form Input */
+  input.form-control,
+  select.form-select {
+    border-radius: 0.75rem;
+    border: 1px solid var(--lilac-muted);
+    background-color: white;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  input.form-control:read-only {
+    background-color: #f0eaff;
+    pointer-events: none;
+    cursor: not-allowed;
+    color: #999;
+  }
+
+  input.form-control:focus,
+  select.form-select:focus {
+    border-color: #a28bd4;
+    box-shadow: 0 0 0 0.2rem rgba(162, 139, 212, 0.25);
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Badge */
+  .badge.bg-success {
+    background-color: #88d6ba;
+    cursor: pointer;
+  }
+
+  .badge.bg-danger {
+    background-color: #e79999;
+    cursor: pointer;
+  }
+
+  .badge {
+    transition: all 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+  }
+
+  .badge:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  /* Card Hover */
+  .card-effect-hover {
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  .card-effect-hover:hover {
+    box-shadow: 0 0 15px 3px rgba(162, 139, 212, 0.75);
+    transform: translateY(-5px);
+  }
+  .table .badge {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .d-flex.gap-2 {
+    gap: 0.5rem;
+  }
 
 </style>
+
+
