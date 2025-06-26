@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2025 at 12:17 PM
+-- Generation Time: Jun 26, 2025 at 02:48 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -116,12 +116,12 @@ CREATE TABLE `tbl_stok` (
 --
 
 INSERT INTO `tbl_stok` (`id_brg`, `nama_brg`, `deskripsi`, `harga`, `stok`, `isi`, `gambar`, `tanggal`, `username`) VALUES
-(3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 5, '0', 'mochi.jpg', '2025-06-26 11:10:56', 'admin'),
-(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 5, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
-(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 13, '0', 'magnum.jpg', '2025-06-26 19:15:15', 'Johana'),
-(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 5, NULL, 'shaky.jpg', '2025-06-25 19:20:27', 'admin'),
-(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 5, NULL, 'eskrim.jpg', '2025-06-25 19:13:55', 'admin'),
-(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 5, '0', '3rasa.jpg', '2025-06-26 13:21:30', 'admin'),
+(3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 16, '0', 'mochi.jpg', '2025-06-26 19:39:38', 'Johana'),
+(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 14, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
+(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 15, '0', 'magnum.jpg', '2025-06-26 19:15:15', 'Johana'),
+(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 15, '0', 'shaky.jpg', '2025-06-26 19:35:34', 'Johana'),
+(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 8, NULL, 'eskrim.jpg', '2025-06-25 19:13:55', 'admin'),
+(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 8, '0', '3rasa.jpg', '2025-06-26 13:21:30', 'admin'),
 (34, 'Paddle Pop', 'Main yuk brareng Paddle Pop Rainbow. Es krim stik warna warni dengan rasa karamel enak. Terbuat dari kebaikan susu dengan gula yang baik untuk anak. Jangan lupa cobain juga varian Paddle Pop lainnya, Paddle Pop Mochi. Tersedia dalam 2 rasa, coklat dan strawberry!', 3000.00, 5, '0', 'paddlepop.jpg', '2025-06-26 11:10:37', 'admin');
 
 -- --------------------------------------------------------
@@ -146,25 +146,8 @@ CREATE TABLE `tbl_transaksi` (
 --
 
 INSERT INTO `tbl_transaksi` (`id_trans`, `tgl_trans`, `id_admin`, `id_brg`, `nama_brg`, `harga`, `jml_jual`, `subtotal`) VALUES
-(1, '2025-06-25 20:00:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 3, 10200.00),
-(2, '2025-06-25 20:15:00', 2, 4, 'Glico Wings Haku Es Krim ', 6000.00, 1, 6000.00),
-(3, '2025-06-25 20:30:00', 1, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
-(4, '2025-06-25 20:45:00', 1, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10000.00, 2, 20000.00),
-(5, '2025-06-25 21:00:00', 2, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10000.00, 1, 10000.00),
-(6, '2025-06-25 21:15:00', 1, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 25000.00, 3, 75000.00),
-(7, '2025-06-26 08:15:00', 2, NULL, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 4, 80800.00),
-(20, '2025-05-02 10:15:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 3, 10200.00),
-(21, '2025-05-04 13:45:00', 2, 4, 'Glico Wings Haku Es Krim ', 5900.00, 1, 5900.00),
-(22, '2025-05-06 11:20:00', 1, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
-(23, '2025-05-09 17:35:00', 2, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
 (24, '2025-05-11 15:50:00', 1, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 4, 40800.00),
-(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 24500.00, 2, 49000.00),
-(26, '2025-05-16 14:30:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 5, 17000.00),
-(27, '2025-05-19 18:25:00', 2, 4, 'Glico Wings Haku Es Krim ', 5900.00, 1, 5900.00),
-(28, '2025-05-22 12:40:00', 1, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 1, 10600.00),
-(29, '2025-05-28 08:55:00', 2, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 2, 20400.00),
-(33, '2025-06-26 10:59:55', 2, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
-(40, '2025-06-26 18:55:27', 5, 4, 'Glico Wings Haku Es Krim ', 6000.00, 6, 36000.00);
+(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 24500.00, 2, 49000.00);
 
 --
 -- Triggers `tbl_transaksi`
