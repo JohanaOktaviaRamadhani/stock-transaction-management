@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 13, 2025 at 03:55 AM
+-- Generation Time: Jun 26, 2025 at 10:34 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -21,15 +21,87 @@ SET time_zone = "+00:00";
 -- Database: `db_webdailyjurnal`
 --
 
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_stok` (IN `p_id_brg` INT)   BEGIN
+    DELETE FROM tbl_stok WHERE id_brg = p_id_brg;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `delete_transaksi` (IN `p_id_trans` INT)   BEGIN
+    DELETE FROM tbl_transaksi WHERE id_trans = p_id_trans;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_stok` (IN `p_nama_brg` TEXT, IN `p_deskripsi` TEXT, IN `p_harga` DECIMAL(10,2), IN `p_stok` INT, IN `p_isi` TEXT, IN `p_gambar` TEXT, IN `p_tanggal` DATETIME, IN `p_username` VARCHAR(50))   BEGIN
+    INSERT INTO tbl_stok (nama_brg, deskripsi, harga, stok, isi, gambar, tanggal, username)
+    VALUES (p_nama_brg, p_deskripsi, p_harga, p_stok, p_isi, p_gambar, p_tanggal, p_username);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insert_transaksi` (IN `p_tgl_trans` DATETIME, IN `p_id_admin` INT, IN `p_id_brg` INT, IN `p_nama_brg` TEXT, IN `p_harga` DECIMAL(10,2), IN `p_jml_jual` INT, IN `p_subtotal` DECIMAL(10,2))   BEGIN
+    INSERT INTO tbl_transaksi (tgl_trans, id_admin, id_brg, nama_brg, harga, jml_jual, subtotal)
+    VALUES (p_tgl_trans, p_id_admin, p_id_brg, p_nama_brg, p_harga, p_jml_jual, p_subtotal);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_stok` (IN `p_id_brg` INT, IN `p_nama_brg` TEXT, IN `p_deskripsi` TEXT, IN `p_harga` DECIMAL(10,2), IN `p_stok` INT, IN `p_isi` TEXT, IN `p_gambar` TEXT, IN `p_tanggal` DATETIME, IN `p_username` VARCHAR(50))   BEGIN
+    UPDATE tbl_stok 
+    SET nama_brg = p_nama_brg,
+        deskripsi = p_deskripsi,
+        harga = p_harga,
+        stok = p_stok,
+        isi = p_isi,
+        gambar = p_gambar,
+        tanggal = p_tanggal,
+        username = p_username
+    WHERE id_brg = p_id_brg;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_transaksi` (IN `p_id_trans` INT, IN `p_id_brg` INT, IN `p_nama_brg` TEXT, IN `p_harga` DECIMAL(10,2), IN `p_jml_jual` INT, IN `p_subtotal` DECIMAL(10,2))   BEGIN
+    UPDATE tbl_transaksi
+    SET 
+        id_brg = p_id_brg,
+        nama_brg = p_nama_brg,
+        harga = p_harga,
+        jml_jual = p_jml_jual,
+        subtotal = p_subtotal
+    WHERE id_trans = p_id_trans;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Table structure for table `tbl_admin`
 --
 
-CREATE TABLE `article` (
+CREATE TABLE `tbl_admin` (
   `id` int NOT NULL,
-  `judul` text,
+  `nama_admin` varchar(100) DEFAULT NULL,
+  `password` text NOT NULL,
+  `foto` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_admin`
+--
+
+INSERT INTO `tbl_admin` (`id`, `nama_admin`, `password`, `foto`) VALUES
+(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', ''),
+(2, 'admin', '0192023a7bbd73250516f069df18b500', 'edit3.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_stok`
+--
+
+CREATE TABLE `tbl_stok` (
+  `id_brg` int NOT NULL,
+  `nama_brg` text,
+  `deskripsi` text,
+  `harga` decimal(10,2) DEFAULT NULL,
+  `stok` int DEFAULT NULL,
   `isi` text,
   `gambar` text,
   `tanggal` datetime DEFAULT NULL,
@@ -37,108 +109,153 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `article`
+-- Dumping data for table `tbl_stok`
 --
 
-INSERT INTO `article` (`id`, `judul`, `isi`, `gambar`, `tanggal`, `username`) VALUES
-(1, 'Teknologi Blockchain untuk Transparansi', 'Blockchain menjadi teknologi revolusioner yang menawarkan transparansi dan keamanan dalam berbagai sektor seperti keuangan, logistik, dan pemerintahan.', 'BLOKCHAIN.jpeg', '2024-12-24 21:00:00', 'admin'),
-(3, 'Manfaat Teknologi AI', 'Teknologi kecerdasan buatan (AI) kini menjadi salah satu inovasi terbesar abad ini. AI telah diterapkan di berbagai sektor seperti kesehatan, pendidikan, hingga transportasi, memberikan efisiensi yang lebih baik dalam berbagai aktivitas.', 'AI.jpeg', '2024-12-24 10:00:00', 'admin'),
-(4, 'Tips Menjaga Kesehatan Mental', 'Dalam era modern ini, kesehatan mental menjadi isu yang semakin penting. Dengan menjaga pola tidur, berolahraga, dan berbicara dengan orang terdekat, kesehatan mental dapat tetap terjaga.', 'MENTAL HEALTH.jpg', '2024-12-24 11:30:00', 'admin'),
-(8, 'Perkembangan Startup di Indonesia', 'Startup di Indonesia terus mengalami perkembangan pesat, terutama di bidang teknologi finansial (fintech). Dukungan pemerintah dan investor asing menjadi pendorong utama pertumbuhan ini.', 'STARTUP.png', '2024-12-24 15:05:00', 'admin'),
-(10, 'Kemajuan Teknologi Medis', 'Teknologi medis terus berkembang dengan hadirnya perangkat seperti robot bedah dan telemedicine. Ini memungkinkan pasien mendapatkan perawatan lebih cepat dan akurat.', 'MEDIS.jpg', '2024-12-24 16:50:00', 'admin'),
-(12, 'Coinvestasi Most Impactful Figures 2024: Merayakan Para Penggerak Industri Kripto dan Web3 di Indonesia', 'Coinvestasi Most Impactful Figures 2024 kembali hadir sebagai penghargaan tahunan untuk mengapresiasi individu-individu yang telah memberikan kontribusi signifikan dalam membangun fondasi ekosistem kripto dan Web3 yang berkelanjutan di Indonesia.', 'CRIPTO.jpg', '2024-12-24 23:16:31', 'admin'),
-(13, 'Jangan Telat! Harga Saham Ini Hanya 81, Tapi Ada Dividen dengan Yield 12,53%', 'Info penting untuk investor saham di Bursa Efek Indonesia (BEI). Di BEI ada salah satu saham dengan harga receh yang siap melakukan pembayaran dividen besar.\r\n\r\nSaham receh itu adalah PT Samcro Hyosung Adilestari Tbk (ACRO). Pada perdagangan Jumat 20 Desember 2024, harga saham ACRO ditutup di level 81.', 'saham.jpg', '2024-12-24 23:19:32', 'admin'),
-(16, 'Prospek Cerah Saham Astra (ASII) saat Suku Bunga Murah 2025 ', 'JAKARTA — Saham PT Astra International Tbk. (ASII) terpantau mencatatkan kinerja yang jeblok di sepanjang tahun berjalan. Lantas, seperti apa prospek saham ASII tahun depan? Berdasarkan data Bursa Efek Indonesia (BEI), harga saham ASII memang mencatatkan penguatan pesat 5,4% pada perdagangan kemarin, Senin (25/11/2024), ditutup di level Rp5.175 per lembar. \r\n', 'astra.jpg', '2024-12-25 16:50:10', 'admin'),
-(17, 'Anak Usaha Batu Bara Thermal ADRO Mau IPO, Begini Prospeknya!', ' PT Adaro Andalan Indonesia Tbk (AADI), anak usaha Adaro Energy Indonesia Tbk (ADRO) punya bisnis di batu bara thermal bakal segera melantai di Bursa Efek Indonesia (BEI) melalui aksi korporasi Initial Public Offering (IPO).\r\nRencana IPO\r\nDalam penawaran IPO, emiten dengan kode saham AADI ini akan melepas sebanyak 778,68 juta saham dengan nilai nominal Rp3.125 per saham, setara dengan 10% dari total saham perusahaan.', 'adaro.jpeg', '2024-12-25 16:53:49', 'admin');
+INSERT INTO `tbl_stok` (`id_brg`, `nama_brg`, `deskripsi`, `harga`, `stok`, `isi`, `gambar`, `tanggal`, `username`) VALUES
+(3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 10, '0', 'mochi.jpg', '2025-06-26 11:10:56', 'admin'),
+(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 4, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
+(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 10, 'Teknologi medis terus berkembang dengan hadirnya perangkat seperti robot bedah dan telemedicine. Ini memungkinkan pasien mendapatkan perawatan lebih cepat dan akurat.', 'magnum.jpg', '2025-06-25 19:15:05', 'admin'),
+(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 10, NULL, 'shaky.jpg', '2025-06-25 19:20:27', 'admin'),
+(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 10, NULL, 'eskrim.jpg', '2025-06-25 19:13:55', 'admin'),
+(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 9, '0', '3rasa.jpg', '2025-06-26 13:21:30', 'admin'),
+(34, 'Paddle Pop', 'Main yuk brareng Paddle Pop Rainbow. Es krim stik warna warni dengan rasa karamel enak. Terbuat dari kebaikan susu dengan gula yang baik untuk anak. Jangan lupa cobain juga varian Paddle Pop lainnya, Paddle Pop Mochi. Tersedia dalam 2 rasa, coklat dan strawberry!', 3000.00, 10, '0', 'paddlepop.jpg', '2025-06-26 11:10:37', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_gallery`
+-- Table structure for table `tbl_transaksi`
 --
 
-CREATE TABLE `tbl_gallery` (
-  `id` int NOT NULL,
-  `judul` varchar(255) NOT NULL,
-  `deskripsi` text,
-  `file` text,
-  `tipe` enum('gambar','video') NOT NULL,
-  `tanggal` date NOT NULL
+CREATE TABLE `tbl_transaksi` (
+  `id_trans` int NOT NULL,
+  `tgl_trans` datetime NOT NULL,
+  `id_admin` int DEFAULT NULL,
+  `id_brg` int DEFAULT NULL,
+  `nama_brg` text,
+  `harga` decimal(10,2) DEFAULT NULL,
+  `jml_jual` int DEFAULT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `tbl_gallery`
+-- Dumping data for table `tbl_transaksi`
 --
 
-INSERT INTO `tbl_gallery` (`id`, `judul`, `deskripsi`, `file`, `tipe`, `tanggal`) VALUES
-(20, 'kedua', '2222222222222222', 'udinus2.jpg', 'gambar', '2024-12-31'),
-(21, 'ketiga', '3333333333333333333', 'caro2.jpg', 'gambar', '2024-12-31'),
-(36, 'video bengkod', 'apapun videonya yg penting under 1000kb ya', 'video 1.mp4', 'video', '2025-01-12');
-
--- --------------------------------------------------------
+INSERT INTO `tbl_transaksi` (`id_trans`, `tgl_trans`, `id_admin`, `id_brg`, `nama_brg`, `harga`, `jml_jual`, `subtotal`) VALUES
+(1, '2025-06-25 20:00:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 3, 10200.00),
+(2, '2025-06-25 20:15:00', 2, 4, 'Glico Wings Haku Es Krim Monaka Vanila & Cokelat K...', 6000.00, 2, 12000.00),
+(3, '2025-06-25 20:30:00', 1, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
+(4, '2025-06-25 20:45:00', 1, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10000.00, 2, 20000.00),
+(5, '2025-06-25 21:00:00', 2, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10000.00, 1, 10000.00),
+(6, '2025-06-25 21:15:00', 1, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350...', 25000.00, 2, 50000.00),
+(7, '2025-06-26 08:15:00', 2, NULL, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 4, 80800.00),
+(9, '2025-06-26 08:16:10', 2, NULL, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 10, 106000.00),
+(20, '2025-05-02 10:15:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 3, 10200.00),
+(21, '2025-05-04 13:45:00', 2, 4, 'Glico Wings Haku Es Krim Monaka Vanila & Cokelat K...', 5900.00, 2, 11800.00),
+(22, '2025-05-06 11:20:00', 1, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
+(23, '2025-05-09 17:35:00', 2, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
+(24, '2025-05-11 15:50:00', 1, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 4, 40800.00),
+(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350...', 24500.00, 1, 24500.00),
+(26, '2025-05-16 14:30:00', 1, 3, 'Glico Wings Frostbite Es Krim Mochi Choco Lava 46 ...', 3400.00, 5, 17000.00),
+(27, '2025-05-19 18:25:00', 2, 4, 'Glico Wings Haku Es Krim Monaka Vanila & Cokelat K...', 5900.00, 3, 17700.00),
+(28, '2025-05-22 12:40:00', 1, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 1, 10600.00),
+(29, '2025-05-28 08:55:00', 2, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 2, 20400.00),
+(33, '2025-06-26 10:59:55', 2, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
+(37, '2025-06-26 11:49:37', 2, 4, 'Glico Wings Haku Es Krim ', 6000.00, 2, 12000.00),
+(38, '2025-06-26 14:10:20', 2, 4, 'Glico Wings Haku Es Krim ', 6000.00, 4, 24000.00),
+(39, '2025-06-26 14:13:33', 2, 4, 'Glico Wings Haku Es Krim ', 6000.00, 2, 12000.00);
 
 --
--- Table structure for table `tbl_user`
+-- Triggers `tbl_transaksi`
 --
+DELIMITER $$
+CREATE TRIGGER `trg_kembalikan_stok_setelah_delete` AFTER DELETE ON `tbl_transaksi` FOR EACH ROW BEGIN
+    UPDATE tbl_stok
+    SET stok = stok + OLD.jml_jual
+    WHERE id_brg = OLD.id_brg;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_kurangi_stok_setelah_insert` AFTER INSERT ON `tbl_transaksi` FOR EACH ROW BEGIN
+    UPDATE tbl_stok
+    SET stok = stok - NEW.jml_jual
+    WHERE id_brg = NEW.id_brg;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trg_update_stok_setelah_update` AFTER UPDATE ON `tbl_transaksi` FOR EACH ROW BEGIN
+    -- Kembalikan stok lama
+    UPDATE tbl_stok
+    SET stok = stok + OLD.jml_jual
+    WHERE id_brg = OLD.id_brg;
 
-CREATE TABLE `tbl_user` (
-  `id` int NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` text NOT NULL,
-  `foto` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tbl_user`
---
-
-INSERT INTO `tbl_user` (`id`, `username`, `password`, `foto`) VALUES
-(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', ''),
-(2, 'admin', '0192023a7bbd73250516f069df18b500', 'edit3.jpeg');
+    -- Kurangi stok baru
+    UPDATE tbl_stok
+    SET stok = stok - NEW.jml_jual
+    WHERE id_brg = NEW.id_brg;
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `article`
+-- Indexes for table `tbl_admin`
 --
-ALTER TABLE `article`
+ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_gallery`
+-- Indexes for table `tbl_stok`
 --
-ALTER TABLE `tbl_gallery`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tbl_stok`
+  ADD PRIMARY KEY (`id_brg`);
 
 --
--- Indexes for table `tbl_user`
+-- Indexes for table `tbl_transaksi`
 --
-ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `tbl_transaksi`
+  ADD PRIMARY KEY (`id_trans`),
+  ADD KEY `fk_admin` (`id_admin`),
+  ADD KEY `fk_barang` (`id_brg`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `article`
+-- AUTO_INCREMENT for table `tbl_admin`
 --
-ALTER TABLE `article`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `tbl_gallery`
---
-ALTER TABLE `tbl_gallery`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `tbl_user`
---
-ALTER TABLE `tbl_user`
+ALTER TABLE `tbl_admin`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_stok`
+--
+ALTER TABLE `tbl_stok`
+  MODIFY `id_brg` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `tbl_transaksi`
+--
+ALTER TABLE `tbl_transaksi`
+  MODIFY `id_trans` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_transaksi`
+--
+ALTER TABLE `tbl_transaksi`
+  ADD CONSTRAINT `fk_admin` FOREIGN KEY (`id_admin`) REFERENCES `tbl_admin` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_barang` FOREIGN KEY (`id_brg`) REFERENCES `tbl_stok` (`id_brg`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
