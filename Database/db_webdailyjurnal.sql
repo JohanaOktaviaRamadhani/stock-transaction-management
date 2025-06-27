@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 26, 2025 at 02:48 PM
+-- Generation Time: Jun 27, 2025 at 07:44 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -116,13 +116,13 @@ CREATE TABLE `tbl_stok` (
 --
 
 INSERT INTO `tbl_stok` (`id_brg`, `nama_brg`, `deskripsi`, `harga`, `stok`, `isi`, `gambar`, `tanggal`, `username`) VALUES
-(3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 16, '0', 'mochi.jpg', '2025-06-26 19:39:38', 'Johana'),
-(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 14, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
-(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 15, '0', 'magnum.jpg', '2025-06-26 19:15:15', 'Johana'),
-(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 15, '0', 'shaky.jpg', '2025-06-26 19:35:34', 'Johana'),
-(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 8, NULL, 'eskrim.jpg', '2025-06-25 19:13:55', 'admin'),
-(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 8, '0', '3rasa.jpg', '2025-06-26 13:21:30', 'admin'),
-(34, 'Paddle Pop', 'Main yuk brareng Paddle Pop Rainbow. Es krim stik warna warni dengan rasa karamel enak. Terbuat dari kebaikan susu dengan gula yang baik untuk anak. Jangan lupa cobain juga varian Paddle Pop lainnya, Paddle Pop Mochi. Tersedia dalam 2 rasa, coklat dan strawberry!', 3000.00, 5, '0', 'paddlepop.jpg', '2025-06-26 11:10:37', 'admin');
+(3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 5, '0', 'mochi.jpg', '2025-06-26 19:39:38', 'Johana'),
+(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 11, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
+(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 14, '0', 'magnum.jpg', '2025-06-26 19:15:15', 'Johana'),
+(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 13, '0', 'shaky.jpg', '2025-06-26 19:35:34', 'Johana'),
+(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 5, '0', 'eskrim.jpg', '2025-06-27 14:43:07', 'Chalida'),
+(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 8, '0', '3rasa.jpg', '2025-06-26 21:51:15', 'Johana'),
+(34, 'Paddle Pop', 'Main yuk brareng Paddle Pop Rainbow. Es krim stik warna warni dengan rasa karamel enak. Terbuat dari kebaikan susu dengan gula yang baik untuk anak. Jangan lupa cobain juga varian Paddle Pop lainnya, Paddle Pop Mochi. Tersedia dalam 2 rasa, coklat dan strawberry!', 3000.00, 15, '0', 'paddlepop.jpg', '2025-06-27 14:42:39', 'Chalida');
 
 -- --------------------------------------------------------
 
@@ -147,7 +147,16 @@ CREATE TABLE `tbl_transaksi` (
 
 INSERT INTO `tbl_transaksi` (`id_trans`, `tgl_trans`, `id_admin`, `id_brg`, `nama_brg`, `harga`, `jml_jual`, `subtotal`) VALUES
 (24, '2025-05-11 15:50:00', 1, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 4, 40800.00),
-(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 24500.00, 2, 49000.00);
+(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 24500.00, 2, 49000.00),
+(41, '2025-01-15 10:45:00', 3, 3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 4000.00, 5, 20000.00),
+(42, '2025-02-20 14:30:00', 5, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
+(43, '2025-03-12 11:10:00', 4, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 3, 30600.00),
+(44, '2025-04-05 09:00:00', 5, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
+(45, '2025-05-21 17:25:00', 3, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 25000.00, 2, 50000.00),
+(46, '2025-06-18 13:45:00', 4, 34, 'Paddle Pop', 3000.00, 4, 12000.00),
+(47, '2025-02-11 16:20:00', 4, 4, 'Glico Wings Haku Es Krim', 6000.00, 3, 18000.00),
+(48, '2025-03-29 08:10:00', 5, 3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 4000.00, 6, 24000.00),
+(49, '2025-04-10 19:00:00', 3, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 1, 10200.00);
 
 --
 -- Triggers `tbl_transaksi`
@@ -227,7 +236,7 @@ ALTER TABLE `tbl_stok`
 -- AUTO_INCREMENT for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `id_trans` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id_trans` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Constraints for dumped tables
