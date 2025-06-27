@@ -10,6 +10,12 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['nama_admin'])) {
     exit;
 }
 
+$bulan = $_GET['bulan'] ?? 'all';
+$tahun = $_GET['tahun'] ?? 'all';
+
+// Tangani pilihan "Semua"
+$showAll = ($bulan === 'all' || $tahun === 'all');
+
 // SIMPAN TRANSAKSI
 if (isset($_POST['simpan'])) {
     $tgl = date("Y-m-d H:i:s");
@@ -75,11 +81,47 @@ if (isset($_POST['hapus'])) {
 }
 ?>
 <div class="container py-4">
-    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-6">
+      <form method="get" class="row g-2 align-items-end">
+        <input type="hidden" name="page" value="adminTransaksi">
+        <div class="col-auto">
+          <label>Bulan</label>
+          <select name="bulan" class="form-select">
+            <option value="all" <?= ($bulan == 'all') ? 'selected' : '' ?>>Semua</option>
+            <?php for ($i = 1; $i <= 12; $i++): 
+              $val = str_pad($i, 2, '0', STR_PAD_LEFT);
+              $selected = ($val == $bulan) ? 'selected' : '';
+            ?>
+              <option value="<?= $val ?>" <?= $selected ?>><?= date('F', mktime(0, 0, 0, $i, 10)) ?></option>
+            <?php endfor; ?>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label>Tahun</label>
+          <select name="tahun" class="form-select">
+            <option value="all" <?= ($tahun == 'all') ? 'selected' : '' ?>>Semua</option>
+            <?php for ($y = 2023; $y <= date('Y'); $y++): 
+              $selected = ($y == $tahun) ? 'selected' : '';
+            ?>
+              <option value="<?= $y ?>" <?= $selected ?>><?= $y ?></option>
+            <?php endfor; ?>
+          </select>
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary">Filter</button>
+          <a href="admin.php?page=adminTransaksi" class="btn btn-secondary">Reset</a>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 text-end">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">
         <i class="bi bi-plus-lg"></i> Tambah Transaksi
-    </button>
+      </button>
+    </div>
+  </div>
 
-    <div class="table-responsive">
+  <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="thead-lilac">
                 <tr>
@@ -95,9 +137,20 @@ if (isset($_POST['hapus'])) {
             </thead>
             <tbody>
                 <?php
-                  $q = $conn->query("SELECT * FROM tbl_transaksi ORDER BY tgl_trans DESC");
+                  if ($showAll) {
+                      $result = $conn->query("SELECT * FROM tbl_transaksi ORDER BY tgl_trans DESC");
+                  } else {
+                      $stmt = $conn->prepare("SELECT * FROM tbl_transaksi WHERE MONTH(tgl_trans) = ? AND YEAR(tgl_trans) = ? ORDER BY tgl_trans DESC");
+                      $bulanInt = (int) $bulan;
+                      $tahunInt = (int) $tahun;
+                      $stmt->bind_param("ii", $bulanInt, $tahunInt);
+                      $stmt->execute();
+                      $result = $stmt->get_result();
+                  }
+
+
                   $no = 1;
-                  while ($row = $q->fetch_assoc()) :
+                  while ($row = $result->fetch_assoc()) :
                   ?>
                   <tr>
                       <td><?= $no++ ?></td>
@@ -193,7 +246,7 @@ if (isset($_POST['hapus'])) {
                 <?php endwhile; ?>
             </tbody>
         </table>
-    </div>
+  </div>
 </div>
 
 <!-- Modal Tambah -->
@@ -541,5 +594,3 @@ if (isset($_POST['hapus'])) {
   }
 
 </style>
-
-

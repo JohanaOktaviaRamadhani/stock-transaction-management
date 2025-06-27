@@ -307,7 +307,7 @@ $hasil = $conn->query($sql);
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" name="update" class="btn btn-primary">Simpan</button>
+                    <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
                     <button type="button" onclick="resetEditForm(<?= $row['id_brg'] ?>)" class="btn btn-warning">Reset</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                   </div>
