@@ -37,7 +37,8 @@ if (isset($_POST['simpan'])) {
         $cekStok->close();
 
         if ($stokTersedia < $jumlah) {
-            echo "<script>alert('Stok tidak mencukupi. Maksimal tersedia: $stokTersedia'); history.back();</script>";
+            $conn->query("DELETE FROM tbl_trsk_lock WHERE table_name = 'tbl_transaksi' AND record_id = 0");  
+          echo "<script>alert('Stok tidak mencukupi. Maksimal tersedia: $stokTersedia'); history.back();</script>";
             exit;
         }
 
@@ -46,6 +47,7 @@ if (isset($_POST['simpan'])) {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("siisdii", $tgl, $id_admin, $id_brg, $nama_brg, $harga, $jumlah, $subtotal);
         $stmt->execute();
+        $conn->query("DELETE FROM tbl_trsk_lock WHERE table_name = 'tbl_transaksi' AND record_id = 0");
         echo "<script>alert('Transaksi berhasil ditambahkan'); location.href='admin.php?page=adminTransaksi';</script>";
     }
 }
@@ -58,6 +60,7 @@ if (isset($_POST['update'])) {
     $harga = floatval($_POST['harga']);
     $jumlah = intval($_POST['jml_jual']);
     $subtotal = $harga * $jumlah;
+    $conn->query("DELETE FROM tbl_trsk_lock WHERE table_name = 'tbl_transaksi' AND record_id = {$id}");
 
     if ($id && $id_brg && $nama_brg && $harga > 0 && $jumlah > 0) {
         $sql = "CALL update_transaksi(?, ?, ?, ?, ?, ?)";
@@ -80,6 +83,7 @@ if (isset($_POST['hapus'])) {
     }
 }
 ?>
+
 <div class="container py-4">
   <div class="row mb-3 align-items-center">
     <div class="col-md-6">
@@ -115,7 +119,7 @@ if (isset($_POST['hapus'])) {
       </form>
     </div>
     <div class="col-md-6 text-end">
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambah">
+      <button class="btn btn-primary" id="btnTambahTrx">
         <i class="bi bi-plus-lg"></i> Tambah Transaksi
       </button>
     </div>
@@ -148,7 +152,6 @@ if (isset($_POST['hapus'])) {
                       $result = $stmt->get_result();
                   }
 
-
                   $no = 1;
                   while ($row = $result->fetch_assoc()) :
                   ?>
@@ -162,7 +165,8 @@ if (isset($_POST['hapus'])) {
                       <td>Rp<?= number_format($row['subtotal'], 0, ',', '.') ?></td>
                       <td>
                         <div class="d-flex gap-2">
-                          <a href="#" class="badge bg-success" data-bs-toggle="modal" data-bs-target="#modalEdit<?= $row['id_trans'] ?>">Edit</a>
+                       <a href="#" class="badge bg-success btnEdit" data-id="<?= $row['id_trans'] ?>">Edit</a>
+
                           <a href="#" class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $row['id_trans'] ?>">Hapus</a>
                         </div>
                       </td>
@@ -345,7 +349,76 @@ if (isset($_POST['hapus'])) {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function () {
+  // Saat tombol tambah transaksi diklik
+  document.getElementById('btnTambahTrx').addEventListener('click', function () {
+    fetch('lock_create_trsk.php', {
+      method: 'POST'
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.status === 'locked') {
+        alert('Form tambah transaksi sedang digunakan oleh admin lain.');
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('modalTambah'));
+        modal.show();
+      }
+    });
+  });
+
+  // Auto-unlock ketika modalTambah ditutup
+  const modalTambah = document.getElementById('modalTambah');
+  if (modalTambah) {
+    modalTambah.addEventListener('hidden.bs.modal', function () {
+      fetch('unlock_tmbh_trsk.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'id=0'
+      });
+    });
+  }
+});
+  // Saat tombol edit diklik
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btnEdit').forEach(function(btn) {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault(); // stop default behavior
+
+    const id = this.getAttribute('data-id');
+    fetch('lock_trsk.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'id=' + id
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (!res.success) {
+        alert(res.message); // kalau gagal, cuma munculin alert
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('modalEdit' + id));
+        modal.show(); // cuma muncul kalau lock berhasil
+      }
+    });
+  });
+});
+
+
+    // Rilis lock jika modal ditutup
+    document.querySelectorAll('.modal').forEach(function(modalEl) {
+      modalEl.addEventListener('hidden.bs.modal', function () {
+        const id = this.id.replace('modalEdit', '');
+        if (id) {
+          fetch('unlock_trsk.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: 'id=' + id
+          });
+        }
+      });
+    });
+  });
 </script>
+
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />

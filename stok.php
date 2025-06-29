@@ -55,6 +55,9 @@ if (isset($_POST['simpan'])) {
     } else {
         echo "<script>alert('Simpan data gagal');document.location='admin.php?page=stok';</script>";
     }
+    $conn->query("DELETE FROM tbl_lock WHERE table_name='tbl_stok' AND record_id=0");
+
+
     $stmt->close();
     $conn->close();
 }
@@ -77,13 +80,18 @@ if (isset($_POST['hapus'])) {
     } else {
         echo "<script>alert('Hapus data gagal');document.location='admin.php?page=stok';</script>";
     }
+
     $stmt->close();
     $conn->close();
 }
+$stmt = $conn->prepare("DELETE FROM tbl_lock WHERE table_name='tbl_stok' AND record_id=?");
+$stmt->bind_param("i", $id_brg);
+$stmt->execute();
+
 ?>
 <!-- BUTTON -->
 <div class="container py-4">
-  <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambah">
+ <button id="btnTambahProduk" class="btn btn-primary mb-3">
     <i class="bi bi-plus-lg"></i> Tambah Produk
   </button>
   <div class="table-responsive fadeInTable" id="stok_data"></div>
@@ -133,6 +141,7 @@ if (isset($_POST['hapus'])) {
 <script>
   $(document).ready(function () {
     load_data();
+
     function load_data(hlm) {
       $.ajax({
         url: "stok_data.php",
@@ -143,12 +152,30 @@ if (isset($_POST['hapus'])) {
         }
       });
     }
+
     $(document).on('click', '.halaman', function () {
       var hlm = $(this).attr("id");
       load_data(hlm);
     });
+
+    // Tombol tambah produk dengan sistem locking
+    $('#btnTambahProduk').on('click', function () {
+      $.post('lock_create.php', { table: 'tbl_stok' }, function (res) {
+        if (res.status == 'locked') {
+          alert('Form tambah produk sedang digunakan oleh admin lain.');
+        } else {
+          $('#modalTambah').modal('show');
+        }
+      }, 'json');
+    });
+
+    // Unlock otomatis ketika modal ditutup (baik klik batal, luar modal, atau esc)
+    $('#modalTambah').on('hidden.bs.modal', function () {
+      $.post('unlock_tmbh.php', { table: 'tbl_stok', record_id: 0 });
+    });
   });
 </script>
+
 
 <!-- Stylesheet -->
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">

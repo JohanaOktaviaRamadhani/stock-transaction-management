@@ -238,7 +238,7 @@ if (!isset($_SESSION['nama_admin'])) {
 
     <!-- Footer -->
     <footer class="bg-footer text-center text-white">
-        © 2024 Johana Oktavia Ramadhani - A11.2023.15024
+        © 2025 Inventory for Lilac Store - by Johana and Chalida and Megan
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

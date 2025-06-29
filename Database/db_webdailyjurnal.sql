@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 27, 2025 at 07:44 AM
+-- Generation Time: Jun 29, 2025 at 03:09 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -96,6 +96,20 @@ INSERT INTO `tbl_admin` (`id`, `nama_admin`, `password`, `foto`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_lock`
+--
+
+CREATE TABLE `tbl_lock` (
+  `table_name` varchar(50) NOT NULL,
+  `record_id` int NOT NULL,
+  `is_locked` tinyint(1) DEFAULT '0',
+  `locked_by` varchar(50) DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_stok`
 --
 
@@ -108,21 +122,28 @@ CREATE TABLE `tbl_stok` (
   `isi` text,
   `gambar` text,
   `tanggal` datetime DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL
+  `username` varchar(50) DEFAULT NULL,
+  `is_locked` tinyint(1) DEFAULT '0',
+  `locked_by` varchar(100) DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `tbl_stok`
 --
 
-INSERT INTO `tbl_stok` (`id_brg`, `nama_brg`, `deskripsi`, `harga`, `stok`, `isi`, `gambar`, `tanggal`, `username`) VALUES
-(3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 'Nikmati mochi khas Jepang dari Frostbite dengan es krim creamy rasa coklat dan lelehan coklat lezat dibalut mochi kenyal! Frostbite Mochi Choco Lava hadir dalam bites size, hanya beberapa gigitan sehingga cocok untuk snack dan dessert. Mengandung Alergen: Padatan Susu (Susu Skim Bubuk, Whey Bubuk), Ekstrak Malt. Size: 46 ML Cara Penyimpanan: Simpan pada suhu beku di bawah -18C No. BPOM: MD 204210064411', 4000.00, 5, '0', 'mochi.jpg', '2025-06-26 19:39:38', 'Johana'),
-(4, 'Glico Wings Haku Es Krim ', 'Es krim taiyaki Jepang dari Glico Wings dengan rasa vanilla dan crispy cokelat. Terinspirasi dari snack khas Jepang yang dapat memberikan keceriaan di tengah keluarga. Mengandung Alergen: Pengemulsi Lesitin Kedelai, Tepung Terigu, Padatan Susu (Susu Skim Bubuk, Bubuk Whey) Cara Penyimpanan: Simpan pada suhu beku di bawah -18C Size: 100 ML No. BPOM: MD 204210052411', 6000.00, 11, '0', 'haku.jpg', '2025-06-26 11:10:45', 'admin'),
-(10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml adalah es krim lezat persembahan Wall\'s dengan rasa stroberi panna yang lembut berisi potongan buah stroberi asli, dilapisi dengan cokelat putih tebal khas Magnum. Menghasilkan es krim dengan rasa manis, segar, dan creamy dalam balutan cokelat Belgia premium yang renyah khas Es Krim Wall\'s Magnum.', 20200.00, 14, '0', 'magnum.jpg', '2025-06-26 19:15:15', 'Johana'),
-(30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 'WALL\'S Ice Cream Shaky Shake 140 ml merupakan es krim rasa cokelat dengan saus dan butiran cokelat yang lezat. Dibuat dengan susu asli dengan kualitas terbaik untuk menghasilkan snack es krim lezat yang creamy serta berkualitas. Dessert Ice Cream Wall\'s hadir untuk membuat #SemuaJadiHappy, membuat kebahagian bagi kamu dan orang sekitar!', 10600.00, 13, '0', 'shaky.jpg', '2025-06-26 19:35:34', 'Johana'),
-(31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 'Es krim rasa Apple Crumble yang creamy, dilengkapi dengan topping yang lezat. Dibungkus wafer cone renyah. Pengalaman snack tak terlupakan yang cocok untuk mencairkan suasana. Nikmati berbagai varian Cornetto lainnya seperti Cornetto Coffee Caramel, Cornetto Black & White, dll', 10200.00, 5, '0', 'eskrim.jpg', '2025-06-27 14:43:07', 'Chalida'),
-(32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 'Es krim Neopolitana lembut rasa coklat, stroberi, dan vanila yang extra creamy. Terbuat dari susu asli sehingga baik untukmu dan menggunakan wadah yang dapat digunakan kembali sehingga baik juga untuk bumi.', 25000.00, 8, '0', '3rasa.jpg', '2025-06-26 21:51:15', 'Johana'),
-(34, 'Paddle Pop', 'Main yuk brareng Paddle Pop Rainbow. Es krim stik warna warni dengan rasa karamel enak. Terbuat dari kebaikan susu dengan gula yang baik untuk anak. Jangan lupa cobain juga varian Paddle Pop lainnya, Paddle Pop Mochi. Tersedia dalam 2 rasa, coklat dan strawberry!', 3000.00, 15, '0', 'paddlepop.jpg', '2025-06-27 14:42:39', 'Chalida');
+INSERT INTO `tbl_stok` (`id_brg`, `nama_brg`, `deskripsi`, `harga`, `stok`, `isi`, `gambar`, `tanggal`, `username`, `is_locked`, `locked_by`, `locked_at`) VALUES
+(37, 'Facetology Triple Care Oil Control Acne Calm Cleanser 100ml', 'Facial Wash yang efektif untuk membantu meredakan tiga jenis jerawat, yaitu Fungal Acne, Jerawat, dan Komedo, tanpa membuat kulit terasa tertarik serta tetap lembab. Diperkaya dengan Zinc Pyrithione, Encapsulated Salicylic Acid, dan Succinic Acid, yang mampu membersihkan kotoran setelah beraktivitas, mengontrol produksi minyak berlebih, serta membantu mengatasi permasalahan jerawat. Terdapat juga calming agent seperti Panthenol, yang menenangkan kulit kemerahan dan membuatnya lebih segar serta nyaman.', 58000.00, 10, '0', 'fw.png', '2025-06-27 22:34:35', 'admin', 0, NULL, NULL),
+(38, 'Facetology Brightening Triple Care Sunscreen SPF 40 PA +++ 100ML', 'Diformulasikan dengan HYBRID formulation dengan menggabungkan kedua macam tipe UV Filters baik physical maupun chemical memberikan perlindungan maksimal terhadap paparan sinar UV Matahari. Facetolgy Triple Care Suncreen tidak hanya memberikan 1 manfaat, namun 3 MANFAAT sekaligus! Hybrid UV Filters dan Blue Oleoactif memberikan perlindungan terhadap UV A, UV B & Blue Light Niacinamide, White Ten TM & Tranexamic Acid mencerahkan wajah CICA, Mugwort & SyriCalm menengankan dan sebagai anti inflamation agents.', 155900.00, 10, '0', 'ssgede.png', '2025-06-27 22:36:08', 'admin', 0, NULL, NULL),
+(39, 'Facetology Triple Care Lip Protector Sunscreen', 'Menggunakan  Triple Lip Sunscreen Protector Sunscreen SPF 50 PA++++ adalah solusi untuk merawat dan sekaligus melindungi bibirmu. Lip serum kami hadir dengan manfaat triple yaitu, diperkaya Vitamin C dan Squalene untuk melembabkan, mencerahkan dan menjaga agar bibir tetap sehat dan cantik.', 56900.00, 10, '0', 'lip.png', '2025-06-27 22:36:50', 'admin', 0, NULL, NULL),
+(40, 'Triple Care Oil Control Acne Calm Moisturizer 35 gr', 'Triple Care Acne Calm Moisturizer membantu meredakan jerawat dalam 2 minggu. Diformulasikan untuk kulit berjerawat, pelembap ringan ini menjaga keseimbangan hidrasi tanpa menyumbat pori-pori dan mencegah kulit kering. Dengan Trikenol, moisturizer ini menenangkan kemerahan, mengontrol minyak berlebih, serta mengatasi jerawat papule/pustule, kemerahan, dan komedo. Teksturnya ringan, cepat meresap, dan tidak lengket.', 69900.00, 10, '0', 'moist.png', '2025-06-27 22:37:49', 'admin', 0, NULL, NULL),
+(41, 'Facetology Triple Care Facial Gel Cleanser Calming Sabun Cuci Muka Gentle Low PH', 'Facial Gel Cleanser yang diformulasikan mampu membersihkan, menghilangkan kotoran dan minyak hingga ke dalam pori yang menyumbat serta aman untuk semua jenis kulit dengan memberikan hidrasi yang cukup, lembut, dan menenangkan di wajah, tanpa membuat kulit menjadi terasa. kering, ketarik maupun iritasi serta mampu menjaga kulit dari radikal bebas.', 58000.00, 10, '0', 'fwoat.png', '2025-06-27 22:39:03', 'admin', 0, NULL, NULL),
+(42, 'Facetology Triple Care Sunscreen Tinted SPF 50 PA++++ 40ML', 'Facetology Triple Care Sunscreen Tinted tidak hanya memberikan perlindungan terhadap UV-A, UV-B dan blue light, tapi juga memiliki kemampuan untuk membantu mencerahkan dan menenangkan kulit wajah. Sebagai sunscreen hybrid, yang berfungsi sebagai sunscreen & decorative Facetology Triple Care Sunscreen Tinted, juga dapat membantu meratakan warna kulit, menyamarkan pori-pori, membantu menyamarkan Kemerahan, serta menghasilkan natural finish look yang cocok untuk digunakan sehari-hari.', 179800.00, 10, '0', 'Screenshot 2025-06-26 220248.png', '2025-06-27 22:42:01', 'admin', 0, NULL, NULL),
+(43, 'Facetology Triple Care Sunscreen For Acne & Oily Skin Sensitive SPF 40 PA+++ 100ML', 'Sunscreen dengan kandungan powder oil absorbent, mampu mengontrol minyak tanpa menyumbat pori pori. Formulanya yang ringan cepat menyerap dengan hasil akhir semi-matte yang nyaman di kulit. Selain itu, bahan seperti mugwort, Centella Asiatica dan Encapsulated Salicylic Acid membantu menenangkan kulit dan mengatasi jerawat dengan aman untuk pengguna sehari hari.', 155900.00, 10, '0', 'tripless.png', '2025-06-27 22:43:46', 'admin', 0, NULL, NULL),
+(44, 'Facetology Triple Care Sunscreen For Acne & Oily Skin SPF 40 PA+++ 40ML', 'Sunscreen dengan kandungan powder oil absorbent, mampu mengontrol minyak tanpa menyumbat pori pori. Formulanya yang ringan cepat menyerap dengan hasil akhir semi-matte yang nyaman di kulit. Selain itu, bahan seperti mugwort, Centella Asiatica dan Encapsulated Salicylic Acid membantu menenangkan kulit dan mengatasi jerawat dengan aman untuk pengguna sehari hari.', 75900.00, 10, '0', 'sunscreen.png', '2025-06-27 22:45:13', 'admin', 0, NULL, NULL),
+(45, 'Facetology Triple Care Acne Calm Micellar Water 300 ML', 'Dengan Tutup Pump Yang BARU dan FORMULA ADVANCED! Say goodbye to redness and impurities! Dengan kandungan Salicylic Acid, Centella Asiatica dan Witch Hazel, Tea Tree Oil, Micellar Water membantu kulit kamu bebas dari makeup, minyak, dan kotoran, sekaligus meredakan jerawat dan kemerahan. Cukup dalam satu kali usap, kulit jadi tenang, seimbang, dan lembap tanpa khawatir akan menimbulkan iritasi atau munculnya jerawat, khususnya untuk yang memiliki kulit berminyak dan berjerawat.', 49000.00, 10, '0', 'micellar.png', '2025-06-27 22:49:59', 'admin', 0, NULL, NULL),
+(46, 'Facetology Triple Care Acne Calm Micellar Water 100ML with Salicylic Acid ', 'Dengan kandungan Salicylic Acid, Centella Asiatica dan Witch Hazel, Tea Tree Oil, Micellar Water membantu kulit kamu bebas dari makeup, minyak, dan kotoran, sekaligus meredakan jerawat dan kemerahan. Cukup dalam satu kali usap, kulit jadi tenang, seimbang, dan lembap tanpa bikin khawatir akan iritasi atau munculnya jerawat, khususnya buat yang punya kulit berminyak dan berjerawat.', 28500.00, 10, '0', 'smallmicellar.png', '2025-06-29 19:36:48', 'Chalida', 0, NULL, NULL),
+(48, 'Facetology Triple Care 13.5% Total Acids Purple Ranger Peeling Treatment Serum Brightening', 'Facetology Triple Care 13.5% Total Acids Purple Ranger Peeling Treatment diformulasikan dengan 10% AHA (Glycolic Acid), 0.5% BHA dan 3% PHA yang berfungsi sebagai eksfoliator untuk meluruhkan sel kulit mati secara mendalam, membantu memudarkan bekas jerawat PIE & PIH. Diperkuat dengan kandungan Pure Cica 5% untuk membantu menenangkan kulit.', 83500.00, 1000, '0', 'acneserum.png', '2025-06-29 19:36:01', 'Chalida', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -146,17 +167,20 @@ CREATE TABLE `tbl_transaksi` (
 --
 
 INSERT INTO `tbl_transaksi` (`id_trans`, `tgl_trans`, `id_admin`, `id_brg`, `nama_brg`, `harga`, `jml_jual`, `subtotal`) VALUES
-(24, '2025-05-11 15:50:00', 1, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 4, 40800.00),
-(25, '2025-05-13 09:05:00', 2, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 24500.00, 2, 49000.00),
-(41, '2025-01-15 10:45:00', 3, 3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 4000.00, 5, 20000.00),
-(42, '2025-02-20 14:30:00', 5, 30, 'Wall\'s Shaky Shake Es Krim Cokelat 140 ml', 10600.00, 2, 21200.00),
-(43, '2025-03-12 11:10:00', 4, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 3, 30600.00),
-(44, '2025-04-05 09:00:00', 5, 10, 'Wall\'s Magnum Es Krim Stroberi Panna 80 ml', 20200.00, 1, 20200.00),
-(45, '2025-05-21 17:25:00', 3, 32, 'Wall\'s Es Krim 3 in 1 Extra Creamy Neopolitana 350 ml', 25000.00, 2, 50000.00),
-(46, '2025-06-18 13:45:00', 4, 34, 'Paddle Pop', 3000.00, 4, 12000.00),
-(47, '2025-02-11 16:20:00', 4, 4, 'Glico Wings Haku Es Krim', 6000.00, 3, 18000.00),
-(48, '2025-03-29 08:10:00', 5, 3, 'Glico Wings Frostbite Mochi Choco Lava 46 ml', 4000.00, 6, 24000.00),
-(49, '2025-04-10 19:00:00', 3, 31, 'Wall\'s Cornetto Es Krim Apple Crumb 108 ml', 10200.00, 1, 10200.00);
+(24, '2025-05-11 15:50:00', 1, 40, 'Triple Care Oil Control Acne Calm Moisturizer 35 gr', 69900.00, 4, 279600.00),
+(25, '2025-05-13 09:05:00', 2, 39, 'Facetology Triple Care Lip Protector Sunscreen', 56900.00, 5, 284500.00),
+(42, '2025-02-20 14:30:00', 5, 45, 'Facetology Triple Care Acne Calm Micellar Water 300 ML', 49000.00, 8, 392000.00),
+(43, '2025-03-12 11:10:00', 4, 44, 'Facetology Triple Care Sunscreen For Acne & Oily Skin SPF 40 PA+++ 40ML', 75900.00, 18, 1366200.00),
+(44, '2025-04-05 09:00:00', 5, 41, 'Facetology Triple Care Facial Gel Cleanser Calming Sabun Cuci Muka Gentle Low PH', 58000.00, 6, 348000.00),
+(45, '2025-05-21 17:25:00', 3, 38, 'Facetology Brightening Triple Care Sunscreen SPF 40 PA +++ 100ML', 155900.00, 3, 467700.00),
+(46, '2025-06-18 13:45:00', 4, 37, 'Facetology Triple Care Oil Control Acne Calm Cleanser 100ml', 58000.00, 4, 232000.00),
+(47, '2025-02-11 16:20:00', 4, 46, 'Facetology Triple Care Acne Calm Micellar Water 100ML Pembersih Wajah Salicylic Acid untuk Kulit Berjerawat dan Berminyak', 28500.00, 7, 199500.00),
+(48, '2025-03-29 08:10:00', 5, 43, 'Facetology Triple Care Sunscreen For Acne & Oily Skin Sensitive SPF 40 PA+++ 100ML', 155900.00, 5, 779500.00),
+(49, '2025-04-10 19:00:00', 3, 42, 'Facetology Triple Care Sunscreen Tinted SPF 50 PA++++ 40ML', 179800.00, 4, 719200.00),
+(51, '2025-06-29 18:21:36', 5, 38, 'Facetology Brightening Triple Care Sunscreen SPF 40 PA +++ 100ML', 155900.00, 2, 311800.00),
+(52, '2025-06-29 18:21:50', 5, 39, 'Facetology Triple Care Lip Protector Sunscreen', 56900.00, 1, 56900.00),
+(53, '2025-06-29 18:22:51', 5, 37, 'Facetology Triple Care Oil Control Acne Calm Cleanser 100ml', 58000.00, 6, 348000.00),
+(55, '2025-06-29 19:05:16', 5, 48, 'Facetology Triple Care 13.5% Total Acids Purple Ranger Peeling Treatment Serum Brightening', 83500.00, 1000, 83500000.00);
 
 --
 -- Triggers `tbl_transaksi`
@@ -192,6 +216,27 @@ END
 $$
 DELIMITER ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_trsk_lock`
+--
+
+CREATE TABLE `tbl_trsk_lock` (
+  `table_name` varchar(50) NOT NULL,
+  `record_id` int NOT NULL,
+  `is_locked` tinyint(1) DEFAULT '0',
+  `locked_by` varchar(50) DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tbl_trsk_lock`
+--
+
+INSERT INTO `tbl_trsk_lock` (`table_name`, `record_id`, `is_locked`, `locked_by`, `locked_at`) VALUES
+('tbl_transaksi', 50, 0, 'admin', '2025-06-27 22:31:26');
+
 --
 -- Indexes for dumped tables
 --
@@ -201,6 +246,12 @@ DELIMITER ;
 --
 ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_lock`
+--
+ALTER TABLE `tbl_lock`
+  ADD PRIMARY KEY (`table_name`,`record_id`);
 
 --
 -- Indexes for table `tbl_stok`
@@ -217,6 +268,12 @@ ALTER TABLE `tbl_transaksi`
   ADD KEY `fk_barang` (`id_brg`);
 
 --
+-- Indexes for table `tbl_trsk_lock`
+--
+ALTER TABLE `tbl_trsk_lock`
+  ADD PRIMARY KEY (`table_name`,`record_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -230,13 +287,13 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `tbl_stok`
 --
 ALTER TABLE `tbl_stok`
-  MODIFY `id_brg` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_brg` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `id_trans` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_trans` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables
